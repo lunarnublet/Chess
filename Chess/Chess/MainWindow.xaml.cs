@@ -24,5 +24,10 @@ namespace Chess
         {
             InitializeComponent();
         }
+
+        private void Pawn_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            
+        }
     }
 }

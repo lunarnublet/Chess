@@ -8,6 +8,7 @@ namespace ChessModel
 {
     abstract class Piece
     {
-
+        char pos1;
+        char pos2;
     }
 }
