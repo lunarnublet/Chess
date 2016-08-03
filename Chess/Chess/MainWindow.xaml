@@ -74,6 +74,7 @@
             <Rectangle x:Name="F1" Height="100" Width="100" Fill="DarkGray" Stroke="DarkGray" StrokeThickness="2" Canvas.Top="700" Canvas.Left="500"/>
             <Rectangle x:Name="G1" Height="100" Width="100" Fill="Gray" Stroke="gray" StrokeThickness="2" Canvas.Top="700" Canvas.Left="600"/>
             <Rectangle x:Name="H1" Height="100" Width="100" Fill="DarkGray" Stroke="DarkGray" StrokeThickness="2" Canvas.Top="700" Canvas.Left="700"/>
+            <Grid Height="790" Width="790"/>
 
         </Canvas>
 

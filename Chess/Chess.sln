@@ -9,6 +9,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChessModel", "ChessModel\Ch
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChessController", "ChessController\ChessController.csproj", "{396D8766-C561-4930-A59D-91CADAC8AEC5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsolChess", "ConsolChess\ConsolChess.csproj", "{BF5508B5-BB0F-4E24-9583-F8401B23E76A}"
+	ProjectSection(ProjectDependencies) = postProject
+		{396D8766-C561-4930-A59D-91CADAC8AEC5} = {396D8766-C561-4930-A59D-91CADAC8AEC5}
+		{B6542FBA-664A-4986-ACF9-664BF2D2646C} = {B6542FBA-664A-4986-ACF9-664BF2D2646C}
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +33,10 @@ Global
 		{396D8766-C561-4930-A59D-91CADAC8AEC5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{396D8766-C561-4930-A59D-91CADAC8AEC5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{396D8766-C561-4930-A59D-91CADAC8AEC5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BF5508B5-BB0F-4E24-9583-F8401B23E76A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BF5508B5-BB0F-4E24-9583-F8401B23E76A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BF5508B5-BB0F-4E24-9583-F8401B23E76A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BF5508B5-BB0F-4E24-9583-F8401B23E76A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
