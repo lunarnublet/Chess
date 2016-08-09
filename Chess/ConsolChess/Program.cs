@@ -15,11 +15,10 @@ namespace ConsolChess
         {
             Console.WriteLine("Program starting...");
             Board board = new Board();
-            //board.Initialize("C:\\Chess\\Chess\\ConsolChess\\Data\\Initialization.txt");
-            //Console.WriteLine(board.ToString());
-            //board.TakeSquare("h1 d2", true);
-            
-            board.InitializeReaderTest("C:\\Chess\\Chess\\ConsolChess\\Data\\IOTest.txt");
+            board.Initialize(args[0]);
+            Console.WriteLine(board.ToString());
+            board.TakeSquare("h1 d2", true);
+            //board.InitializeReaderTest(args[0]);
             Console.WriteLine("Program ending...");
         }
     }

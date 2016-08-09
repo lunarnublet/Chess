@@ -8,5 +8,6 @@ namespace ChessModel
 {
     class Player
     {
+        string name;
     }
 }

@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace ChessModel
 {
-    class Pawn : Piece
+    class Bishop : Piece
     {
-        public Pawn()
+        public Bishop()
         {
-            pieceType = PieceName.PAWN;
-            behavior = new MoveSet[2] { MoveSet.SINGLE, MoveSet.FORWARD };
+            pieceType = PieceName.BISHOP;
+            behavior = new MoveSet[2] { MoveSet.MULTIPLE, MoveSet.DIAGONAL };
         }
     }
 }
