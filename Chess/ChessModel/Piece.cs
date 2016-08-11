@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace ChessModel
 {
-    public enum MoveSet { DIAGONAL, STRAIGHT, SINGLE, L, FORWARD, MULTIPLE};
+    public enum Behavior { DIAGONAL, STRAIGHT, SINGLE, L, FORWARD, MULTIPLE};
     public enum PieceName { KING, QUEEN, ROOK, BISHOP, KNIGHT, PAWN };
-    abstract class Piece
+    public abstract class Piece
     {
         public PieceName pieceType;
-        protected MoveSet[] behavior;
+        public Behavior[] MoveSet;
     }
 }

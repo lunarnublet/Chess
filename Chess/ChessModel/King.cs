@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace ChessModel
 {
-    class King : Piece
+    public class King : Piece
     {
         public King()
         {
             pieceType = PieceName.KING;
-            behavior = new MoveSet[3] { MoveSet.SINGLE, MoveSet.STRAIGHT, MoveSet.DIAGONAL };
+            MoveSet = new Behavior[3] { Behavior.SINGLE, Behavior.STRAIGHT, Behavior.DIAGONAL };
         }
     }
 }

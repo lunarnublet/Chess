@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ChessModel
 {
-    class Player
+    public class Player
     {
         string name;
     }
