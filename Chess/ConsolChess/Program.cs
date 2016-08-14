@@ -14,27 +14,20 @@ namespace ConsolChess
         static void Main(string[] args)
         {
             Console.WriteLine("Program starting...");
-            //Board board = new Board();
-            //board.Initialize(args[0]);
-            //Console.WriteLine(board.ToString());
-            //board.TakeSquare("h1 d2", true);
-            //board.InitializeReaderTest(args[0]);
 
+            Game game = new Game();
+            game.Run();
 
-            Piece piece = new Queen();
-            Console.WriteLine(piece.pieceType.ToString());
-            referenceTest(ref piece);
-
-            Console.WriteLine(piece.pieceType.ToString());
 
             Console.WriteLine("Program ending...");
         }
 
-        static void referenceTest(ref Piece piece)
-        {
-            Console.WriteLine(piece.pieceType.ToString());
-            piece = new Pawn();
-            Console.WriteLine(piece.pieceType.ToString());
-        }
+        //static void referenceTest( Piece[] pieces)
+        //{
+        //    Console.WriteLine(pieces[0].ToString() + ", " + pieces[1].ToString());
+        //    pieces[0] = new Rook(false);
+        //    pieces[1] = new Pawn(false);
+        //    Console.WriteLine(pieces[0].ToString() + ", " + pieces[1].ToString());
+        //}
     }
 }

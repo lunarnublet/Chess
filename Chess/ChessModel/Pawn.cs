@@ -8,10 +8,16 @@ namespace ChessModel
 {
     public class Pawn : Piece
     {
-        public Pawn()
+        public bool hasBeenMoved;
+        public Pawn(bool isWhite):base(isWhite)
         {
             pieceType = PieceName.PAWN;
-            MoveSet = new Behavior[2] { Behavior.SINGLE, Behavior.FORWARD };
+            hasBeenMoved = false;
+        }
+
+        public override string ToString()
+        {
+            return base.ToString() + "P";
         }
     }
 }

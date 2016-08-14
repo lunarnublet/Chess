@@ -8,10 +8,15 @@ namespace ChessModel
 {
     public class Bishop : Piece
     {
-        public Bishop()
+        public Bishop(bool isWhite) : base(isWhite)
         {
             pieceType = PieceName.BISHOP;
-            MoveSet = new Behavior[2] { Behavior.MULTIPLE, Behavior.DIAGONAL };
+            MoveSet = new Behavior[1] {Behavior.DIAGONAL };
+        }
+
+        public override string ToString()
+        {
+            return base.ToString() + "B";
         }
     }
 }

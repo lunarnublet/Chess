@@ -8,10 +8,15 @@ namespace ChessModel
 {
     public class Queen: Piece
     {
-        public Queen()
+        public Queen(bool isWhite) : base(isWhite)
         {
             pieceType = PieceName.QUEEN;
-            MoveSet = new Behavior[3] { Behavior.MULTIPLE, Behavior.STRAIGHT, Behavior.DIAGONAL };
+            MoveSet = new Behavior[2] { Behavior.STRAIGHT, Behavior.DIAGONAL };
+        }
+
+        public override string ToString()
+        {
+            return base.ToString() + "Q";
         }
     }
 }

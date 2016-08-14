@@ -8,10 +8,16 @@ namespace ChessModel
 {
     public class Knight:Piece
     {
-        public Knight()
+        public bool hasBeenMoved;
+        public Knight(bool isWhite) : base(isWhite)
         {
             pieceType = PieceName.KNIGHT;
-            MoveSet = new Behavior[2] { Behavior.SINGLE, Behavior.L};
+            hasBeenMoved = false;
+        }
+
+        public override string ToString()
+        {
+            return base.ToString() + "N";
         }
     }
 }

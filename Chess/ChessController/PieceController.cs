@@ -9,10 +9,10 @@ namespace ChessController
 {
     class PieceController
     {
-        ChessModel.Piece[] aliveWhitePieces;
-        ChessModel.Piece[] deadWhitePieces;
-        ChessModel.Piece[] aliveBlackPieces;
-        ChessModel.Piece[] deadBlackPieces;
+        public ChessModel.Piece[] aliveWhitePieces;
+        public ChessModel.Piece[] deadWhitePieces;
+        public ChessModel.Piece[] aliveBlackPieces;
+        public ChessModel.Piece[] deadBlackPieces;
 
 
 
@@ -48,42 +48,42 @@ namespace ChessController
 
             try
             {
-                aliveWhitePieces[0] = new Rook();
-                aliveWhitePieces[1] = new Knight();
-                aliveWhitePieces[2] = new Bishop();
-                aliveWhitePieces[3] = new King();
-                aliveWhitePieces[4] = new Queen();
-                aliveWhitePieces[5] = new Bishop();
-                aliveWhitePieces[6] = new Knight();
-                aliveWhitePieces[7] = new Rook();
+                aliveWhitePieces[0] = new Rook(true);
+                aliveWhitePieces[1] = new Knight(true);
+                aliveWhitePieces[2] = new Bishop(true);
+                aliveWhitePieces[3] = new King(true);
+                aliveWhitePieces[4] = new Queen(true);
+                aliveWhitePieces[5] = new Bishop(true);
+                aliveWhitePieces[6] = new Knight(true);
+                aliveWhitePieces[7] = new Rook(true);
 
-                aliveBlackPieces[0] = new Rook();
-                aliveBlackPieces[1] = new Knight();
-                aliveBlackPieces[2] = new Bishop();
-                aliveBlackPieces[3] = new King();
-                aliveBlackPieces[4] = new Queen();
-                aliveBlackPieces[5] = new Bishop();
-                aliveBlackPieces[6] = new Knight();
-                aliveBlackPieces[7] = new Rook();
+                aliveBlackPieces[0] = new Rook(false);
+                aliveBlackPieces[1] = new Knight(false);
+                aliveBlackPieces[2] = new Bishop(false);
+                aliveBlackPieces[3] = new King(false);
+                aliveBlackPieces[4] = new Queen(false);
+                aliveBlackPieces[5] = new Bishop(false);
+                aliveBlackPieces[6] = new Knight(false);
+                aliveBlackPieces[7] = new Rook(false);
 
                 for (int i = 8; i < aliveBlackPieces.Length; ++i)
                 {
-                    aliveWhitePieces[i] = new Pawn();
-                    aliveBlackPieces[i] = new Pawn();
+                    aliveWhitePieces[i] = new Pawn(true);
+                    aliveBlackPieces[i] = new Pawn(false);
                 }
             }
-            catch(IndexOutOfRangeException)
+            catch (IndexOutOfRangeException)
             {
                 return false;
             }
             return true;
         }
 
-        public bool changePiece(ref Piece oldPiece, ref Piece newPiece, bool isWhite)
+        public bool changePiece(ref Piece oldPiece, ref Piece newPiece)
         {
             for (int i = 0; i < aliveWhitePieces.Length; ++i)
             {
-                if (isWhite)
+                if (oldPiece.isWhite)
                 {
                     if (aliveWhitePieces[i] == oldPiece)
                     {
@@ -103,11 +103,11 @@ namespace ChessController
             return false;
         }
 
-        public bool killPiece(ref Piece piece, bool isWhite)
+        public bool killPiece(ref Piece piece)
         {
             for (int i = 0; i < aliveWhitePieces.Length; ++i)
             {
-                if (isWhite)
+                if (piece.isWhite)
                 {
                     if (aliveWhitePieces[i] == piece)
                     {
@@ -129,18 +129,60 @@ namespace ChessController
             return false;
         }
 
-        public string[] PieceMovementOptions(ref Piece piece, bool isWhite, Piece[,] boardPieces)
+        public List<string> PieceMovementOptions(ref Piece piece, Piece[,] boardPieces)
         {
-
-            switch (piece.MoveSet[0])
+            List<string> moveOptions = new List<string>();
+            int pieceRow = 0;
+            int pieceCol = 0;
+            for (int i = 0; i < Math.Sqrt(boardPieces.Length); ++i)
             {
-                case Behavior.SINGLE:
-                    for(int i = 0; i < piece.beha)
-                    break;
-
-                case Behavior.MULTIPLE:
-                    break;
+                for (int v = 0; v < Math.Sqrt(boardPieces.Length); ++i)
+                {
+                    if (boardPieces[i, v] == piece)
+                    {
+                        pieceRow = i;
+                        pieceCol = v;
+                        break;
+                    }
+                }
             }
+            switch (piece.pieceType)
+            {
+                case PieceName.PAWN:
+                    {
+                        moveOptions.AddRange(CheckPawnMoves(pieceRow, pieceCol, boardPieces, (Pawn)piece));
+                        break;
+                    }
+            }
+            return moveOptions;
+        }
+
+        private List<string> CheckPawnMoves(int pieceRow, int pieceCol, Piece[,] boardPieces, Pawn p)
+        {
+            List<string> moves = new List<string>();
+            int direction = 1;
+
+            if (!p.isWhite)
+            {
+                direction = -1;
+            }
+            if (boardPieces[pieceRow + direction, pieceCol] == null)
+            {
+                moves.Add((pieceRow + direction) + "" + pieceCol);
+            }
+            if (boardPieces[pieceRow + direction, pieceCol - 1] != null)
+            {
+                moves.Add((pieceRow + direction) + "" + (pieceCol - 1));
+            }
+            if (boardPieces[pieceRow + direction, pieceCol + 1] != null)
+            {
+                moves.Add((pieceRow + direction) + "" + (pieceCol + 1));
+            }
+            if (!p.hasBeenMoved)
+            {
+                moves.Add(pieceRow + (direction * 2) + "" + pieceCol);
+            }
+            return moves;
         }
     }
 }
