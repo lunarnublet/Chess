@@ -8,12 +8,10 @@ namespace ChessModel
 {
     public class Rook : Piece
     {
-        public bool hasBeenMoved;
         public Rook(bool isWhite) : base(isWhite)
         {
             pieceType = PieceName.ROOK;
-            MoveSet = new Behavior[1] {Behavior.STRAIGHT };
-            hasBeenMoved = false;
+            MoveSet = new Behavior[2] {Behavior.MULTIPLE, Behavior.STRAIGHT };
         }
 
         public override string ToString()

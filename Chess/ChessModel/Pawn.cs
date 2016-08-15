@@ -8,11 +8,9 @@ namespace ChessModel
 {
     public class Pawn : Piece
     {
-        public bool hasBeenMoved;
         public Pawn(bool isWhite):base(isWhite)
         {
             pieceType = PieceName.PAWN;
-            hasBeenMoved = false;
         }
 
         public override string ToString()

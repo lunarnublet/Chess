@@ -11,7 +11,7 @@ namespace ChessModel
         public Bishop(bool isWhite) : base(isWhite)
         {
             pieceType = PieceName.BISHOP;
-            MoveSet = new Behavior[1] {Behavior.DIAGONAL };
+            MoveSet = new Behavior[2] {Behavior.MULTIPLE, Behavior.DIAGONAL };
         }
 
         public override string ToString()

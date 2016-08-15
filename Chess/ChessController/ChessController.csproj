@@ -42,6 +42,7 @@
   <ItemGroup>
     <Compile Include="FileIO.cs" />
     <Compile Include="Game.cs" />
+    <Compile Include="IController.cs" />
     <Compile Include="PieceController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

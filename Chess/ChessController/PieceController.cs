@@ -7,14 +7,15 @@ using ChessModel;
 
 namespace ChessController
 {
-    class PieceController
+    public class PieceController
     {
         public ChessModel.Piece[] aliveWhitePieces;
         public ChessModel.Piece[] deadWhitePieces;
         public ChessModel.Piece[] aliveBlackPieces;
         public ChessModel.Piece[] deadBlackPieces;
 
-
+        public delegate void PieceKilled(ref Piece piece);
+        public event PieceKilled pieceKilled;
 
         public bool initializeOld(Piece[] alivePiecesWhite, Piece[] deadPiecesWhite, Piece[] alivePiecesBlack, Piece[] deadPiecesBlack)
         {
@@ -113,6 +114,7 @@ namespace ChessController
                     {
                         aliveWhitePieces[i] = null;
                         deadWhitePieces[i] = piece;
+                        OnPieceKilled(ref piece);
                         return true;
                     }
                 }
@@ -122,6 +124,7 @@ namespace ChessController
                     {
                         aliveBlackPieces[i] = null;
                         deadBlackPieces[i] = piece;
+                        OnPieceKilled(ref piece);
                         return true;
                     }
                 }
@@ -129,14 +132,23 @@ namespace ChessController
             return false;
         }
 
+        private void OnPieceKilled(ref Piece piece)
+        {
+            if( pieceKilled != null)
+            {
+                pieceKilled.Invoke(ref piece);
+            }
+        }
+
         public List<string> PieceMovementOptions(ref Piece piece, Piece[,] boardPieces)
         {
             List<string> moveOptions = new List<string>();
+            if (piece == null) { return moveOptions; }
             int pieceRow = 0;
             int pieceCol = 0;
             for (int i = 0; i < Math.Sqrt(boardPieces.Length); ++i)
             {
-                for (int v = 0; v < Math.Sqrt(boardPieces.Length); ++i)
+                for (int v = 0; v < Math.Sqrt(boardPieces.Length); ++v)
                 {
                     if (boardPieces[i, v] == piece)
                     {
@@ -153,34 +165,196 @@ namespace ChessController
                         moveOptions.AddRange(CheckPawnMoves(pieceRow, pieceCol, boardPieces, (Pawn)piece));
                         break;
                     }
+                case PieceName.KING:
+                    {
+                        moveOptions.AddRange(CheckStraightMoves(pieceRow, pieceCol, boardPieces, piece, false));
+                        moveOptions.AddRange(CheckDiagnalMoves(pieceRow, pieceCol, boardPieces, piece, false));
+                        break;
+                    }
+                case PieceName.BISHOP:
+                    {
+                        moveOptions.AddRange(CheckDiagnalMoves(pieceRow, pieceCol, boardPieces, piece, true));
+                        break;
+                    }
+                case PieceName.QUEEN:
+                    {
+                        moveOptions.AddRange(CheckStraightMoves(pieceRow, pieceCol, boardPieces, piece, true));
+                        moveOptions.AddRange(CheckDiagnalMoves(pieceRow, pieceCol, boardPieces, piece, true));
+                        break;
+                    }
+                case PieceName.ROOK:
+                    {
+                        moveOptions.AddRange(CheckStraightMoves(pieceRow, pieceCol, boardPieces, piece, true));
+                        break;
+                    }
+                case PieceName.KNIGHT:
+                    {
+                        moveOptions.AddRange(CheckKnightMoves(pieceRow, pieceCol, boardPieces, piece));
+                        break;
+                    }
+
             }
             return moveOptions;
         }
 
-        private List<string> CheckPawnMoves(int pieceRow, int pieceCol, Piece[,] boardPieces, Pawn p)
+        private IEnumerable<string> CheckKnightMoves(int pieceRow, int pieceCol, Piece[,] boardPieces, Piece piece)
+        {
+            throw new NotImplementedException();
+        }
+
+        private List<string> CheckKingMoves(int pieceRow, int pieceCol, Piece[,] boardPieces, King piece)
+        {
+            return CheckStraightMoves(pieceRow, pieceCol, boardPieces, piece, false);
+        }
+
+        private List<string> CheckStraightMoves(int pieceRow, int pieceCol, Piece[,] boardPieces, Piece piece, bool recursion)
         {
             List<string> moves = new List<string>();
-            int direction = 1;
 
+            int looptimes = 1;
+            if (recursion) { looptimes = 8; }
+
+            bool up = true, down = true, left = true, right = true;
+
+            for (int j = 1; j <= looptimes; ++j)
+            {
+                for (int i = 1; i <= 3; ++i)
+                {
+                    for (int v = 1; v <= 3; ++v)
+                    {
+                        if (i % 2 == v % 2) { continue; }
+                        int z = (i % 2) * j;
+                        int x = (v % 2) * j;
+                        if (i > 2) { z *= -1; }
+                        if (v > 2) { x *= -1; }
+                        try
+                        {
+                            if ((z > 0 && !up) || (z < 0 && !down) || (x > 0 && !right) || (x < 0 && !left))
+                            {
+                                continue;
+                            }
+                            if (boardPieces[pieceRow + z, pieceCol + x] == null)
+                            {
+                                moves.Add((pieceRow + z) + "" + (pieceCol + x));
+                            }
+                            else
+                            {
+                                if (boardPieces[pieceRow + z, pieceCol + x].isWhite != piece.isWhite)
+                                {
+                                    moves.Add((pieceRow + z) + "" + (pieceCol + x));
+                                }
+                                if (z > 0) { up = false; }
+                                if (z < 0) { down = false; }
+                                if (x > 0) { right = false; }
+                                if (x < 0) { left = false; }
+                            }
+                        }
+                        catch (IndexOutOfRangeException)
+                        {
+
+                        }
+                    }
+                }
+            }
+            return moves;
+        }
+
+        private List<string> CheckDiagnalMoves(int pieceRow, int pieceCol, Piece[,] boardPieces, Piece piece, bool recursion)
+        {
+            List<string> moves = new List<string>();
+
+            int looptimes = 1;
+            if (recursion) { looptimes = 8; }
+
+            bool upleft = true, upright = true, downleft = true, downright = true;
+
+            for (int j = 1; j <= looptimes; ++j)
+            {
+                for (int i = 1; i <= 3; ++i)
+                {
+                    for (int v = 1; v <= 3; ++v)
+                    {
+                        if (i % 2 != v % 2) { continue; }
+                        int z = (i % 2) * j;
+                        int x = (v % 2) * j;
+                        if (i > 2) { z *= -1; }
+                        if (v > 2) { x *= -1; }
+                        try
+                        {
+                            if ((z > 0 && x > 0 && !upright) || (z < 0 && x > 0 && !downright) || (x < 0 && z < 0 && !downleft) || (x < 0 && z > 0 && !upleft))
+                            {
+                                continue;
+                            }
+                            if (boardPieces[pieceRow + z, pieceCol + x] == null)
+                            {
+                                moves.Add((pieceRow + z) + "" + (pieceCol + x));
+                            }
+                            else
+                            {
+                                if (boardPieces[pieceRow + z, pieceCol + x].isWhite != piece.isWhite)
+                                {
+                                    moves.Add((pieceRow + z) + "" + (pieceCol + x));
+                                }
+                                if (z > 0 && x > 0) { upright = false; }
+                                if (z < 0 && x > 0) { downright = false; }
+                                if (x < 0 && z < 0) { downleft = false; }
+                                if (x < 0 && z > 0) { upleft = false; }
+                            }
+                        }
+                        catch (IndexOutOfRangeException)
+                        {
+
+                        }
+                    }
+                }
+            }
+            return moves;
+        }
+
+        private List<string> CheckPawnMoves(int pieceRow, int pieceCol, Piece[,] boardPieces, Piece p)
+        {
+            List<string> moves = new List<string>();
+            int direction = -1;
+
+            try
+            {
+                if (boardPieces[pieceRow + direction, pieceCol - 1] != null && boardPieces[pieceRow + direction, pieceCol - 1].isWhite != p.isWhite)
+                {
+                    moves.Add((pieceRow + direction) + "" + (pieceCol - 1));
+                }
+            }
+            catch (IndexOutOfRangeException)
+            {
+
+            }
+            try
+            {
+                if (boardPieces[pieceRow + direction, pieceCol - 1] != null && boardPieces[pieceRow + direction, pieceCol - 1].isWhite != p.isWhite)
+                {
+                    moves.Add((pieceRow + direction) + "" + (pieceCol - 1));
+                }
+            }
+            catch (IndexOutOfRangeException)
+            {
+                if (boardPieces[pieceRow + direction, pieceCol + 1] != null && boardPieces[pieceRow + direction, pieceCol + 1].isWhite == p.isWhite)
+                {
+                    moves.Add((pieceRow + direction) + "" + (pieceCol + 1));
+                }
+            }
             if (!p.isWhite)
             {
-                direction = -1;
+                direction = 1;
             }
             if (boardPieces[pieceRow + direction, pieceCol] == null)
             {
                 moves.Add((pieceRow + direction) + "" + pieceCol);
             }
-            if (boardPieces[pieceRow + direction, pieceCol - 1] != null)
+            if (!p.hasMoved)
             {
-                moves.Add((pieceRow + direction) + "" + (pieceCol - 1));
-            }
-            if (boardPieces[pieceRow + direction, pieceCol + 1] != null)
-            {
-                moves.Add((pieceRow + direction) + "" + (pieceCol + 1));
-            }
-            if (!p.hasBeenMoved)
-            {
-                moves.Add(pieceRow + (direction * 2) + "" + pieceCol);
+                if (boardPieces[pieceRow + (direction * 2), pieceCol] == null)
+                {
+                    moves.Add(pieceRow + (direction * 2) + "" + pieceCol);
+                }
             }
             return moves;
         }

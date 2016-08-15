@@ -14,7 +14,7 @@ namespace ChessModel
 
         public Board()
         {
-            
+
         }
 
         public bool PlacePiece(int row, int col, ref Piece piece)
@@ -50,5 +50,41 @@ namespace ChessModel
             return temp;
         }
 
+        public bool KillPiece(int row, int col)
+        {
+            try
+            {
+                boardPieces[row, col] = null;
+                return true;
+            }
+            catch (IndexOutOfRangeException)
+            {
+                return false;
+            }
+        }
+
+        public bool MovePiece(ref Piece piece, int newRow, int newCol)
+        {
+            for (int i = 0; i < boardSize; ++i)
+            {
+                for (int v = 0; v < boardSize; ++v)
+                {
+                    if (boardPieces[i, v] == piece)
+                    { 
+                        try
+                        {
+                            boardPieces[newRow, newCol] = piece;
+                            boardPieces[i, v] = null;
+                            return true;
+                        }
+                        catch (IndexOutOfRangeException)
+                        {
+                            return false;
+                        }
+                    }
+                }
+            }
+            return false;
+        }
     }
 }
