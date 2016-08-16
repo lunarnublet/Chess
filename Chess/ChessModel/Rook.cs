@@ -11,7 +11,6 @@ namespace ChessModel
         public Rook(bool isWhite) : base(isWhite)
         {
             pieceType = PieceName.ROOK;
-            MoveSet = new Behavior[2] {Behavior.MULTIPLE, Behavior.STRAIGHT };
         }
 
         public override string ToString()

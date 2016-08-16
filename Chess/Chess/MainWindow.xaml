@@ -5,10 +5,103 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Chess"
         mc:Ignorable="d"
-        Title="Chess" Height="830" Width="810" ResizeMode="CanMinimize">
+        Title="Chess" Height="700" Width="700" ResizeMode="CanResizeWithGrip">
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
 
-        <Canvas Height="800" Width="800">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <DataGridCell Grid.Row="0" Grid.Column="0" Background="Gray" Content="A8"/>
+        <DataGridCell Grid.Row="0" Grid.Column="1" Background="DarkGray" Content="B8"/>
+        <DataGridCell Grid.Row="0" Grid.Column="2" Background="Gray" Content="C8"/>
+        <DataGridCell Grid.Row="0" Grid.Column="3" Background="DarkGray" Content="D8"/>
+        <DataGridCell Grid.Row="0" Grid.Column="4" Background="Gray" Content="E8"/>
+        <DataGridCell Grid.Row="0" Grid.Column="5" Background="DarkGray" Content="F8"/>
+        <DataGridCell Grid.Row="0" Grid.Column="6" Background="Gray" Content="G8"/>
+        <DataGridCell Grid.Row="0" Grid.Column="7" Background="DarkGray" Content="H8"/>
+
+        <DataGridCell Grid.Row="1" Grid.Column="0" Background="DarkGray" Content="A7"/>
+        <DataGridCell Grid.Row="1" Grid.Column="1" Background="Gray" Content="B7"/>
+        <DataGridCell Grid.Row="1" Grid.Column="2" Background="DarkGray" Content="C7"/>
+        <DataGridCell Grid.Row="1" Grid.Column="3" Background="Gray" Content="D7"/>
+        <DataGridCell Grid.Row="1" Grid.Column="4" Background="DarkGray" Content="E7"/>
+        <DataGridCell Grid.Row="1" Grid.Column="5" Background="Gray" Content="F7"/>
+        <DataGridCell Grid.Row="1" Grid.Column="6" Background="DarkGray" Content="G7"/>
+        <DataGridCell Grid.Row="1" Grid.Column="7" Background="Gray" Content="H7"/>
+
+        <DataGridCell Grid.Row="2" Grid.Column="0" Background="Gray" Content="A6"/>
+        <DataGridCell Grid.Row="2" Grid.Column="1" Background="DarkGray" Content="B6"/>
+        <DataGridCell Grid.Row="2" Grid.Column="2" Background="Gray" Content="C6"/>
+        <DataGridCell Grid.Row="2" Grid.Column="3" Background="DarkGray" Content="D6"/>
+        <DataGridCell Grid.Row="2" Grid.Column="4" Background="Gray" Content="E6"/>
+        <DataGridCell Grid.Row="2" Grid.Column="5" Background="DarkGray" Content="F6"/>
+        <DataGridCell Grid.Row="2" Grid.Column="6" Background="Gray" Content="G6"/>
+        <DataGridCell Grid.Row="2" Grid.Column="7" Background="DarkGray" Content="H6"/>
+
+        <DataGridCell Grid.Row="3" Grid.Column="0" Background="DarkGray" Content="A5"/>
+        <DataGridCell Grid.Row="3" Grid.Column="1" Background="Gray" Content="B5"/>
+        <DataGridCell Grid.Row="3" Grid.Column="2" Background="DarkGray" Content="C5"/>
+        <DataGridCell Grid.Row="3" Grid.Column="3" Background="Gray" Content="D5"/>
+        <DataGridCell Grid.Row="3" Grid.Column="4" Background="DarkGray" Content="E5"/>
+        <DataGridCell Grid.Row="3" Grid.Column="5" Background="Gray" Content="F5"/>
+        <DataGridCell Grid.Row="3" Grid.Column="6" Background="DarkGray" Content="G5"/>
+        <DataGridCell Grid.Row="3" Grid.Column="7" Background="Gray" Content="H5"/>
+
+        <DataGridCell Grid.Row="4" Grid.Column="0" Background="Gray" Content="A4"/>
+        <DataGridCell Grid.Row="4" Grid.Column="1" Background="DarkGray" Content="B4"/>
+        <DataGridCell Grid.Row="4" Grid.Column="2" Background="Gray" Content="C4"/>
+        <DataGridCell Grid.Row="4" Grid.Column="3" Background="DarkGray" Content="D4"/>
+        <DataGridCell Grid.Row="4" Grid.Column="4" Background="Gray" Content="E4"/>
+        <DataGridCell Grid.Row="4" Grid.Column="5" Background="DarkGray" Content="F4"/>
+        <DataGridCell Grid.Row="4" Grid.Column="6" Background="Gray" Content="G4"/>
+        <DataGridCell Grid.Row="4" Grid.Column="7" Background="DarkGray" Content="H4"/>
+
+        <DataGridCell Grid.Row="5" Grid.Column="0" Background="DarkGray" Content="A3"/>
+        <DataGridCell Grid.Row="5" Grid.Column="1" Background="Gray" Content="B3"/>
+        <DataGridCell Grid.Row="5" Grid.Column="2" Background="DarkGray" Content="C3"/>
+        <DataGridCell Grid.Row="5" Grid.Column="3" Background="Gray" Content="D3"/>
+        <DataGridCell Grid.Row="5" Grid.Column="4" Background="DarkGray" Content="E3"/>
+        <DataGridCell Grid.Row="5" Grid.Column="5" Background="Gray" Content="F3"/>
+        <DataGridCell Grid.Row="5" Grid.Column="6" Background="DarkGray" Content="G3"/>
+        <DataGridCell Grid.Row="5" Grid.Column="7" Background="Gray" Content="H3"/>
+
+        <DataGridCell Grid.Row="6" Grid.Column="0" Background="Gray" Content="A2"/>
+        <DataGridCell Grid.Row="6" Grid.Column="1" Background="DarkGray" Content="B2"/>
+        <DataGridCell Grid.Row="6" Grid.Column="2" Background="Gray" Content="C2"/>
+        <DataGridCell Grid.Row="6" Grid.Column="3" Background="DarkGray" Content="D2"/>
+        <DataGridCell Grid.Row="6" Grid.Column="4" Background="Gray" Content="E2"/>
+        <DataGridCell Grid.Row="6" Grid.Column="5" Background="DarkGray" Content="F2"/>
+        <DataGridCell Grid.Row="6" Grid.Column="6" Background="Gray" Content="G2"/>
+        <DataGridCell Grid.Row="6" Grid.Column="7" Background="DarkGray" Content="H2"/>
+
+        <DataGridCell Grid.Row="7" Grid.Column="0" Background="DarkGray" Content="A1"/>
+        <DataGridCell Grid.Row="7" Grid.Column="1" Background="Gray" Content="B1"/>
+        <DataGridCell Grid.Row="7" Grid.Column="2" Background="DarkGray" Content="C1"/>
+        <DataGridCell Grid.Row="7" Grid.Column="3" Background="Gray" Content="D1"/>
+        <DataGridCell Grid.Row="7" Grid.Column="4" Background="DarkGray" Content="E1"/>
+        <DataGridCell Grid.Row="7" Grid.Column="5" Background="Gray" Content="F1"/>
+        <DataGridCell Grid.Row="7" Grid.Column="6" Background="DarkGray" Content="G1"/>
+        <DataGridCell Grid.Row="7" Grid.Column="7" Background="Gray" Content="H1"/>
+
+
+        <!--<Canvas Height="800" Width="800">
             <Image x:Name="Pawn" MouseRightButtonDown="Pawn_MouseRightButtonDown"></Image>
             <Rectangle x:Name="H7" Height="100" Width="100" Fill="DarkGray" Stroke="DarkGray" StrokeThickness="2" Canvas.Top="100" Canvas.Left="700"></Rectangle>
             <Rectangle x:Name="B7" Height="100" Width="100" Fill="DarkGray" Stroke="DarkGray" StrokeThickness="2" Canvas.Left="100" Canvas.Top="100"></Rectangle>
@@ -76,7 +169,7 @@
             <Rectangle x:Name="H1" Height="100" Width="100" Fill="DarkGray" Stroke="DarkGray" StrokeThickness="2" Canvas.Top="700" Canvas.Left="700"/>
             <Grid Height="790" Width="790"/>
 
-        </Canvas>
+        </Canvas>-->
 
 
     </Grid>

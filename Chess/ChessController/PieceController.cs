@@ -167,8 +167,7 @@ namespace ChessController
                     }
                 case PieceName.KING:
                     {
-                        moveOptions.AddRange(CheckStraightMoves(pieceRow, pieceCol, boardPieces, piece, false));
-                        moveOptions.AddRange(CheckDiagnalMoves(pieceRow, pieceCol, boardPieces, piece, false));
+                        moveOptions.AddRange(CheckKingMoves(pieceRow, pieceCol, boardPieces, (King)piece));
                         break;
                     }
                 case PieceName.BISHOP:
@@ -192,19 +191,57 @@ namespace ChessController
                         moveOptions.AddRange(CheckKnightMoves(pieceRow, pieceCol, boardPieces, piece));
                         break;
                     }
-
             }
             return moveOptions;
         }
 
         private IEnumerable<string> CheckKnightMoves(int pieceRow, int pieceCol, Piece[,] boardPieces, Piece piece)
         {
-            throw new NotImplementedException();
+            List<string> moves = new List<string>();
+
+            for (int j = 0; j < 2; j++)
+            {
+                for (int i = 0; i < 2; ++i)
+                {
+                    for (int v = 0; v < 2; ++v)
+                    {
+                        try
+                        {
+                            int x;
+                            int y;
+                            if (j == 0) { x = 1; y = 2; }
+                            else { x = 2; y = 1; }
+                            if (i > 0) { x *= -1; }
+                            if (v > 0) { y *= -1; }
+                            if (boardPieces[pieceRow + x, pieceCol + y] == null)
+                            {
+                                moves.Add((pieceRow + x) + "" + (pieceCol + y));
+                            }
+                            else
+                            {
+                                if (boardPieces[pieceRow + x, pieceCol + y].isWhite != piece.isWhite)
+                                {
+                                    moves.Add((pieceRow + x) + "" + (pieceCol + y));
+                                }
+                            }
+                        }
+                        catch (IndexOutOfRangeException)
+                        {
+
+                        }
+                    }
+                }
+            }
+            return moves;
+
         }
 
         private List<string> CheckKingMoves(int pieceRow, int pieceCol, Piece[,] boardPieces, King piece)
         {
-            return CheckStraightMoves(pieceRow, pieceCol, boardPieces, piece, false);
+            List<string> moves = CheckStraightMoves(pieceRow, pieceCol, boardPieces, piece, false);
+            moves.AddRange(CheckDiagnalMoves(pieceRow, pieceCol, boardPieces, piece, false));
+
+            return moves;
         }
 
         private List<string> CheckStraightMoves(int pieceRow, int pieceCol, Piece[,] boardPieces, Piece piece, bool recursion)
@@ -315,45 +352,42 @@ namespace ChessController
         {
             List<string> moves = new List<string>();
             int direction = -1;
+            if (!p.isWhite)
+            {
+                direction = 1;
+            }
 
             try
-            {
-                if (boardPieces[pieceRow + direction, pieceCol - 1] != null && boardPieces[pieceRow + direction, pieceCol - 1].isWhite != p.isWhite)
-                {
-                    moves.Add((pieceRow + direction) + "" + (pieceCol - 1));
-                }
-            }
-            catch (IndexOutOfRangeException)
-            {
-
-            }
-            try
-            {
-                if (boardPieces[pieceRow + direction, pieceCol - 1] != null && boardPieces[pieceRow + direction, pieceCol - 1].isWhite != p.isWhite)
-                {
-                    moves.Add((pieceRow + direction) + "" + (pieceCol - 1));
-                }
-            }
-            catch (IndexOutOfRangeException)
             {
                 if (boardPieces[pieceRow + direction, pieceCol + 1] != null && boardPieces[pieceRow + direction, pieceCol + 1].isWhite == p.isWhite)
                 {
                     moves.Add((pieceRow + direction) + "" + (pieceCol + 1));
                 }
             }
-            if (!p.isWhite)
+            catch (IndexOutOfRangeException)
             {
-                direction = 1;
+
+            }
+            try
+            {
+                if (boardPieces[pieceRow + direction, pieceCol - 1] != null && boardPieces[pieceRow + direction, pieceCol - 1].isWhite != p.isWhite)
+                {
+                    moves.Add((pieceRow + direction) + "" + (pieceCol - 1));
+                }
+            }
+            catch (IndexOutOfRangeException)
+            {
+                
             }
             if (boardPieces[pieceRow + direction, pieceCol] == null)
             {
                 moves.Add((pieceRow + direction) + "" + pieceCol);
-            }
-            if (!p.hasMoved)
-            {
-                if (boardPieces[pieceRow + (direction * 2), pieceCol] == null)
+                if (!p.hasMoved)
                 {
-                    moves.Add(pieceRow + (direction * 2) + "" + pieceCol);
+                    if (boardPieces[pieceRow + (direction * 2), pieceCol] == null)
+                    {
+                        moves.Add(pieceRow + (direction * 2) + "" + pieceCol);
+                    }
                 }
             }
             return moves;
