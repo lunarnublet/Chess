@@ -11,6 +11,17 @@ namespace ChessModel
         public Bishop(bool isWhite) : base(isWhite)
         {
             pieceType = PieceName.BISHOP;
+            //if (isWhite) { imageURI = "C:\\Chess\\Chess\\Chess\\PiecePNGs\\White Bishop.png"; }
+            //else { imageURI = "C:\\Chess\\Chess\\Chess\\PiecePNGs\\Black Bishop.png"; }
+            if (isWhite)
+            {
+                image = new System.Windows.Media.Imaging.BitmapImage(new Uri("C:\\Chess\\Chess\\Chess\\PiecePNGs\\White Bishop.png"));
+            }
+            else
+            {
+                image = new System.Windows.Media.Imaging.BitmapImage(new Uri("C:\\Chess\\Chess\\Chess\\PiecePNGs\\Black Bishop.png"));
+            }
+
         }
 
         public override string ToString()

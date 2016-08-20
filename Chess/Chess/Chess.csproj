@@ -37,6 +37,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -94,6 +95,16 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ChessController\ChessController.csproj">
+      <Project>{396d8766-c561-4930-a59d-91cadac8aec5}</Project>
+      <Name>ChessController</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ChessModel\ChessModel.csproj">
+      <Project>{b6542fba-664a-4986-acf9-664bf2d2646c}</Project>
+      <Name>ChessModel</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

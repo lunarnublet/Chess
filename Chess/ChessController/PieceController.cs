@@ -10,9 +10,15 @@ namespace ChessController
     public class PieceController
     {
         public ChessModel.Piece[] aliveWhitePieces;
-        public ChessModel.Piece[] deadWhitePieces;
         public ChessModel.Piece[] aliveBlackPieces;
-        public ChessModel.Piece[] deadBlackPieces;
+
+        Piece whiteKingCheckedBy = null;
+        Piece blackKingCheckedBy = null;
+
+        public bool whiteKingInCheck = false;
+        public bool blackKingInCheck = false;
+
+        public List<Piece> availableToMove = new List<Piece>();
 
         public delegate void PieceKilled(ref Piece piece);
         public event PieceKilled pieceKilled;
@@ -20,17 +26,13 @@ namespace ChessController
         public bool initializeOld(Piece[] alivePiecesWhite, Piece[] deadPiecesWhite, Piece[] alivePiecesBlack, Piece[] deadPiecesBlack)
         {
             aliveWhitePieces = new Piece[16];
-            deadWhitePieces = new Piece[16];
             aliveBlackPieces = new Piece[16];
-            deadBlackPieces = new Piece[16];
             try
             {
                 for (int i = 0; i < alivePiecesWhite.Length; ++i)
                 {
                     aliveWhitePieces[i] = alivePiecesWhite[i];
-                    deadWhitePieces[i] = deadPiecesWhite[i];
                     aliveBlackPieces[i] = alivePiecesBlack[i];
-                    deadBlackPieces[i] = deadPiecesBlack[i];
                 }
             }
             catch (IndexOutOfRangeException)
@@ -43,9 +45,7 @@ namespace ChessController
         public bool initializeNew()
         {
             aliveWhitePieces = new Piece[16];
-            deadWhitePieces = new Piece[16];
             aliveBlackPieces = new Piece[16];
-            deadBlackPieces = new Piece[16];
 
             try
             {
@@ -80,7 +80,172 @@ namespace ChessController
             return true;
         }
 
-        public bool changePiece(ref Piece oldPiece, ref Piece newPiece)
+        internal Piece[,] GetCopyOfBoard(Piece[,] boardPieces)
+        {
+            Piece[,] temp = new Piece[Board.boardSize, Board.boardSize];
+            for (int j = 0; j < Board.boardSize; ++j)
+            {
+                for (int k = 0; k < Board.boardSize; ++k)
+                {
+                    temp[j, k] = boardPieces[j, k];
+                }
+            }
+            return temp;
+        }
+
+        internal void GetPiecePosition(ref Piece piece, Piece[,] boardPieces, out int outRow, out int outCol)
+        {
+            for (int n = 0; n < Board.boardSize; ++n)
+            {
+                for (int m = 0; m < Board.boardSize; ++m)
+                {
+                    if (boardPieces[n, m] == piece)
+                    {
+                        outRow = n;
+                        outCol = m;
+                        return;
+                    }
+                }
+            }
+            outRow = -1;
+            outCol = -1;
+        }
+
+        internal List<Piece> GetPiecesThatCanMove(Piece[,] boardPieces, bool whitesTurn)
+        {
+            List<Piece> temp = new List<Piece>();
+            Piece[,] tempBoard = new Piece[Board.boardSize, Board.boardSize];
+            Piece checker = null;
+            if (whitesTurn)
+            {
+                for (int i = 0; i < aliveWhitePieces.Length; ++i)
+                {
+                    if (aliveWhitePieces[i] != null)
+                    {
+                        temp.Add(aliveWhitePieces[i]);
+                    }
+                }
+                if (whiteKingCheckedBy != null)
+                {
+                    checker = whiteKingCheckedBy;
+                }
+            }
+            else
+            {
+                for (int i = 0; i < aliveBlackPieces.Length; ++i)
+                {
+                    if (aliveBlackPieces[i] != null)
+                    {
+                        temp.Add(aliveBlackPieces[i]);
+                    }
+                }
+                if (blackKingCheckedBy != null)
+                {
+                    checker = blackKingCheckedBy;
+                }
+            }
+            List<Piece> possibleRemoval = new List<Piece>();
+            foreach (Piece piece in temp)
+            {
+                int i = -1;
+                int v = -1;
+                for (int j = 0; j < Board.boardSize; ++j)
+                {
+                    for (int k = 0; k < Board.boardSize; ++k)
+                    {
+                        if (boardPieces[j, k] == piece)
+                        {
+                            i = j;
+                            v = k;
+                        }
+                    }
+                }
+                tempBoard = GetCopyOfBoard(boardPieces);
+                if (i != -1)
+                {
+                    List<string> tempMoves = PieceMovementOptions(ref tempBoard[i, v], tempBoard);
+                    if (tempMoves.Count > 0)
+                    {
+                        if (checker != null)
+                        {
+                            int checkerRow = -1;
+                            int checkerCol = -1;
+                            GetPiecePosition(ref checker, boardPieces, out checkerRow, out checkerCol);
+                            List<string> tempMoves2 = new List<string>();
+                            List<string> tempRemove = new List<string>();
+                            List<string> oldCheckerMoves = checker.possibleMoves;
+                            foreach (string item in tempMoves)
+                            {
+                                if (item == checkerRow + "" + checkerCol)
+                                {
+                                    tempMoves2.Add(item);
+                                }
+                                foreach (string item2 in checker.possibleMoves)
+                                {
+                                    if (item == item2)
+                                    {
+                                        bool exists = false;
+                                        foreach (string item3 in tempMoves2)
+                                        {
+                                            if (item == item3)
+                                            {
+                                                exists = true;
+                                            }
+                                        }
+                                        if (!exists)
+                                        {
+                                            tempMoves2.Add(item);
+                                        }
+                                    }
+                                }
+                            }
+                            foreach (string item in tempMoves2)
+                            {
+                                int row = int.Parse(item.Substring(0, 1));
+                                int col = int.Parse(item.Substring(1, 1));
+                                tempBoard[row, col] = tempBoard[i, v];
+                                tempBoard[i, v] = null;
+                                checker.possibleMoves = PieceMovementOptions(ref checker, tempBoard);
+                                if (Check(tempBoard, whitesTurn, true))
+                                {
+                                    tempRemove.Add(item);
+                                }
+                                checker.possibleMoves = oldCheckerMoves;
+                                tempBoard = GetCopyOfBoard(boardPieces);
+                            }
+                            foreach (var item in tempRemove)
+                            {
+                                tempMoves2.Remove(item);
+                            }
+                            if (tempMoves2.Count == 0)
+                            {
+                                boardPieces[i, v].possibleMoves = tempMoves2;
+                                possibleRemoval.Add(piece);
+                            }
+                            else
+                            {
+                                boardPieces[i, v].possibleMoves = tempMoves2;
+                            }
+                        }
+                        else
+                        {
+                            boardPieces[i, v].possibleMoves = tempMoves;
+                        }
+                    }
+                    else
+                    {
+                        possibleRemoval.Add(piece);
+                    }
+                }
+            }
+            foreach (Piece item in possibleRemoval)
+            {
+                temp.Remove(item);
+            }
+            return temp;
+        }
+
+        public bool changePiece(ref Piece oldPiece, Piece newPiece)
         {
             for (int i = 0; i < aliveWhitePieces.Length; ++i)
             {
@@ -106,6 +271,10 @@ namespace ChessController
 
         public bool killPiece(ref Piece piece)
         {
+            if (piece == null)
+            {
+                return false;
+            }
             for (int i = 0; i < aliveWhitePieces.Length; ++i)
             {
                 if (piece.isWhite)
@@ -113,7 +282,6 @@ namespace ChessController
                     if (aliveWhitePieces[i] == piece)
                     {
                         aliveWhitePieces[i] = null;
-                        deadWhitePieces[i] = piece;
                         OnPieceKilled(ref piece);
                         return true;
                     }
@@ -123,7 +291,6 @@ namespace ChessController
                     if (aliveBlackPieces[i] == piece)
                     {
                         aliveBlackPieces[i] = null;
-                        deadBlackPieces[i] = piece;
                         OnPieceKilled(ref piece);
                         return true;
                     }
@@ -140,15 +307,82 @@ namespace ChessController
             }
         }
 
+        public bool Check(Piece[,] boardPieces, bool whitesTurn, bool isTest)
+        {
+            bool myKing = false;
+            List<Piece> tempEnemy = new List<Piece>();
+            if (whitesTurn)
+            {
+                for (int i = 0; i < aliveBlackPieces.Length; ++i)
+                {
+                    if (aliveBlackPieces[i] != null)
+                    {
+                        tempEnemy.Add(aliveBlackPieces[i]);
+                    }
+                }
+            }
+            else
+            {
+                for (int i = 0; i < aliveWhitePieces.Length; ++i)
+                {
+                    if (aliveWhitePieces[i] != null)
+                    {
+                        tempEnemy.Add(aliveWhitePieces[i]);
+                    }
+                }
+            }
+            foreach (Piece enemyPiece in tempEnemy)
+            {
+                foreach (string move in enemyPiece.possibleMoves)
+                {
+                    Piece piece = boardPieces[int.Parse(move.Substring(0, 1)), int.Parse(move.Substring(1, 1))];
+                    if (piece is King)
+                    {
+                        myKing = true;
+                        if (!isTest)
+                        {
+                            if (whitesTurn)
+                            {
+                                whiteKingInCheck = true;
+                                whiteKingCheckedBy = enemyPiece;
+                            }
+                            else
+                            {
+                                blackKingInCheck = true;
+                                blackKingCheckedBy = enemyPiece;
+                            }
+                        }
+                    }
+                }
+            }
+            if (!isTest)
+            {
+                if (!myKing)
+                {
+                    if (whitesTurn)
+                    {
+                        whiteKingInCheck = false;
+                        whiteKingCheckedBy = null;
+                    }
+                    else
+                    {
+                        blackKingInCheck = false;
+                        blackKingCheckedBy = null;
+                    }
+                }
+            }
+            return myKing;
+        }
+
         public List<string> PieceMovementOptions(ref Piece piece, Piece[,] boardPieces)
         {
             List<string> moveOptions = new List<string>();
             if (piece == null) { return moveOptions; }
             int pieceRow = 0;
             int pieceCol = 0;
-            for (int i = 0; i < Math.Sqrt(boardPieces.Length); ++i)
+            for (int i = 0; i < Board.boardSize; ++i)
             {
-                for (int v = 0; v < Math.Sqrt(boardPieces.Length); ++v)
+                for (int v = 0; v < Board.boardSize; ++v)
                 {
                     if (boardPieces[i, v] == piece)
                     {
@@ -233,7 +467,6 @@ namespace ChessController
                 }
             }
             return moves;
-
         }
 
         private List<string> CheckKingMoves(int pieceRow, int pieceCol, Piece[,] boardPieces, King piece)
@@ -359,7 +592,7 @@ namespace ChessController
 
             try
             {
-                if (boardPieces[pieceRow + direction, pieceCol + 1] != null && boardPieces[pieceRow + direction, pieceCol + 1].isWhite == p.isWhite)
+                if (boardPieces[pieceRow + direction, pieceCol + 1] != null && boardPieces[pieceRow + direction, pieceCol + 1].isWhite != p.isWhite)
                 {
                     moves.Add((pieceRow + direction) + "" + (pieceCol + 1));
                 }

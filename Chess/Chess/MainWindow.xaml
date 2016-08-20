@@ -5,8 +5,289 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Chess"
         mc:Ignorable="d"
-        Title="Chess" Height="700" Width="700" ResizeMode="CanResizeWithGrip">
-    <Grid>
+        Title="Chess" Height="637" Width="610" ResizeMode="CanMinimize">
+    <StackPanel x:Name="MainPanel" Orientation="Vertical" MouseLeftButtonDown="MainPanel_MouseLeftButtonDown" MouseRightButtonDown="MainPanel_MouseRightButtonDown">
+        <StackPanel Orientation="Horizontal">
+            <Canvas Background="Gray" Width="75" Height="75">
+                <Border BorderBrush="Blue" BorderThickness="3" Width="75" Height="75" Visibility="Hidden"/>
+                <Image Height="60" Width="60" Margin="5,8,0,0"></Image>
+            </Canvas>
+            <Canvas Background="DarkGray" Width="75" Height="75">
+                <Border BorderBrush="Blue" BorderThickness="3" Width="75" Height="75" Visibility="Hidden"/>
+                <Image Height="60" Width="60" Margin="5,8,0,0"></Image>
+            </Canvas>
+            <Canvas Background="Gray" Width="75" Height="75">
+                <Border BorderBrush="Blue" BorderThickness="3" Width="75" Height="75" Visibility="Hidden"/>
+                <Image Height="60" Width="60" Margin="5,8,0,0"></Image>
+            </Canvas>
+            <Canvas Background="DarkGray" Width="75" Height="75">
+                <Border BorderBrush="Blue" BorderThickness="3" Width="75" Height="75" Visibility="Hidden"/>
+                <Image Height="60" Width="60" Margin="5,8,0,0"></Image>
+            </Canvas>
+            <Canvas Background="Gray" Width="75" Height="75">
+                <Border BorderBrush="Blue" BorderThickness="3" Width="75" Height="75" Visibility="Hidden"/>
+                <Image Height="60" Width="60" Margin="5,8,0,0"></Image>
+            </Canvas>
+            <Canvas Background="DarkGray" Width="75" Height="75">
+                <Border BorderBrush="Blue" BorderThickness="3" Width="75" Height="75" Visibility="Hidden"/>
+                <Image Height="60" Width="60" Margin="5,8,0,0"></Image>
+            </Canvas>
+            <Canvas Background="Gray" Width="75" Height="75">
+                <Border BorderBrush="Blue" BorderThickness="3" Width="75" Height="75" Visibility="Hidden"/>
+                <Image Height="60" Width="60" Margin="5,8,0,0"></Image>
+            </Canvas>
+            <Canvas Background="DarkGray" Width="75" Height="75">
+                <Border BorderBrush="Blue" BorderThickness="3" Width="75" Height="75" Visibility="Hidden"/>
+                <Image Height="60" Width="60" Margin="5,8,0,0"></Image>
+            </Canvas>
+        </StackPanel>
+        
+        <StackPanel Orientation="Horizontal">
+            <Canvas Background="DarkGray" Width="75" Height="75">
+                <Border BorderBrush="Blue" BorderThickness="3" Width="75" Height="75" Visibility="Hidden"/>
+                <Image Height="60" Width="60" Margin="5,8,0,0"></Image>
+            </Canvas>
+            <Canvas Background="Gray" Width="75" Height="75">
+                <Border BorderBrush="Blue" BorderThickness="3" Width="75" Height="75" Visibility="Hidden"/>
+                <Image Height="60" Width="60" Margin="5,8,0,0"></Image>
+            </Canvas>
+            <Canvas Background="DarkGray" Width="75" Height="75">
+                <Border BorderBrush="Blue" BorderThickness="3" Width="75" Height="75" Visibility="Hidden"/>
+                <Image Height="60" Width="60" Margin="5,8,0,0"></Image>
+            </Canvas>
+            <Canvas Background="Gray" Width="75" Height="75">
+                <Border BorderBrush="Blue" BorderThickness="3" Width="75" Height="75" Visibility="Hidden"/>
+                <Image Height="60" Width="60" Margin="5,8,0,0"></Image>
+            </Canvas>
+            <Canvas Background="DarkGray" Width="75" Height="75">
+                <Border BorderBrush="Blue" BorderThickness="3" Width="75" Height="75" Visibility="Hidden"/>
+                <Image Height="60" Width="60" Margin="5,8,0,0"></Image>
+            </Canvas>
+            <Canvas Background="Gray" Width="75" Height="75">
+                <Border BorderBrush="Blue" BorderThickness="3" Width="75" Height="75" Visibility="Hidden"/>
+                <Image Height="60" Width="60" Margin="5,8,0,0"></Image>
+            </Canvas>
+            <Canvas Background="DarkGray" Width="75" Height="75">
+                <Border BorderBrush="Blue" BorderThickness="3" Width="75" Height="75" Visibility="Hidden"/>
+                <Image Height="60" Width="60" Margin="5,8,0,0"></Image>
+            </Canvas>
+            <Canvas Background="Gray" Width="75" Height="75">
+                <Border BorderBrush="Blue" BorderThickness="3" Width="75" Height="75" Visibility="Hidden"/>
+                <Image Height="60" Width="60" Margin="5,8,0,0"></Image>
+            </Canvas>
+        </StackPanel>
+
+        <StackPanel Orientation="Horizontal">
+            <Canvas Background="Gray" Width="75" Height="75">
+                <Border BorderBrush="Blue" BorderThickness="3" Width="75" Height="75" Visibility="Hidden"/>
+                <Image Height="60" Width="60" Margin="5,8,0,0"></Image>
+            </Canvas>
+            <Canvas Background="DarkGray" Width="75" Height="75">
+                <Border BorderBrush="Blue" BorderThickness="3" Width="75" Height="75" Visibility="Hidden"/>
+                <Image Height="60" Width="60" Margin="5,8,0,0"></Image>
+            </Canvas>
+            <Canvas Background="Gray" Width="75" Height="75">
+                <Border BorderBrush="Blue" BorderThickness="3" Width="75" Height="75" Visibility="Hidden"/>
+                <Image Height="60" Width="60" Margin="5,8,0,0"></Image>
+            </Canvas>
+            <Canvas Background="DarkGray" Width="75" Height="75">
+                <Border BorderBrush="Blue" BorderThickness="3" Width="75" Height="75" Visibility="Hidden"/>
+                <Image Height="60" Width="60" Margin="5,8,0,0"></Image>
+            </Canvas>
+            <Canvas Background="Gray" Width="75" Height="75">
+                <Border BorderBrush="Blue" BorderThickness="3" Width="75" Height="75" Visibility="Hidden"/>
+                <Image Height="60" Width="60" Margin="5,8,0,0"></Image>
+            </Canvas>
+            <Canvas Background="DarkGray" Width="75" Height="75">
+                <Border BorderBrush="Blue" BorderThickness="3" Width="75" Height="75" Visibility="Hidden"/>
+                <Image Height="60" Width="60" Margin="5,8,0,0"></Image>
+            </Canvas>
+            <Canvas Background="Gray" Width="75" Height="75">
+                <Border BorderBrush="Blue" BorderThickness="3" Width="75" Height="75" Visibility="Hidden"/>
+                <Image Height="60" Width="60" Margin="5,8,0,0"></Image>
+            </Canvas>
+            <Canvas Background="DarkGray" Width="75" Height="75">
+                <Border BorderBrush="Blue" BorderThickness="3" Width="75" Height="75" Visibility="Hidden"/>
+                <Image Height="60" Width="60" Margin="5,8,0,0"></Image>
+            </Canvas>
+        </StackPanel>
+
+        <StackPanel Orientation="Horizontal">
+            <Canvas Background="DarkGray" Width="75" Height="75">
+                <Border BorderBrush="Blue" BorderThickness="3" Width="75" Height="75" Visibility="Hidden"/>
+                <Image Height="60" Width="60" Margin="5,8,0,0"></Image>
+            </Canvas>
+            <Canvas Background="Gray" Width="75" Height="75">
+                <Border BorderBrush="Blue" BorderThickness="3" Width="75" Height="75" Visibility="Hidden"/>
+                <Image Height="60" Width="60" Margin="5,8,0,0"></Image>
+            </Canvas>
+            <Canvas Background="DarkGray" Width="75" Height="75">
+                <Border BorderBrush="Blue" BorderThickness="3" Width="75" Height="75" Visibility="Hidden"/>
+                <Image Height="60" Width="60" Margin="5,8,0,0"></Image>
+            </Canvas>
+            <Canvas Background="Gray" Width="75" Height="75">
+                <Border BorderBrush="Blue" BorderThickness="3" Width="75" Height="75" Visibility="Hidden"/>
+                <Image Height="60" Width="60" Margin="5,8,0,0"></Image>
+            </Canvas>
+            <Canvas Background="DarkGray" Width="75" Height="75">
+                <Border BorderBrush="Blue" BorderThickness="3" Width="75" Height="75" Visibility="Hidden"/>
+                <Image Height="60" Width="60" Margin="5,8,0,0"></Image>
+            </Canvas>
+            <Canvas Background="Gray" Width="75" Height="75">
+                <Border BorderBrush="Blue" BorderThickness="3" Width="75" Height="75" Visibility="Hidden"/>
+                <Image Height="60" Width="60" Margin="5,8,0,0"></Image>
+            </Canvas>
+            <Canvas Background="DarkGray" Width="75" Height="75">
+                <Border BorderBrush="Blue" BorderThickness="3" Width="75" Height="75" Visibility="Hidden"/>
+                <Image Height="60" Width="60" Margin="5,8,0,0"></Image>
+            </Canvas>
+            <Canvas Background="Gray" Width="75" Height="75">
+                <Border BorderBrush="Blue" BorderThickness="3" Width="75" Height="75" Visibility="Hidden"/>
+                <Image Height="60" Width="60" Margin="5,8,0,0"></Image>
+            </Canvas>
+        </StackPanel>
+
+        <StackPanel Orientation="Horizontal">
+            <Canvas Background="Gray" Width="75" Height="75">
+                <Border BorderBrush="Blue" BorderThickness="3" Width="75" Height="75" Visibility="Hidden"/>
+                <Image Height="60" Width="60" Margin="5,8,0,0"></Image>
+            </Canvas>
+            <Canvas Background="DarkGray" Width="75" Height="75">
+                <Border BorderBrush="Blue" BorderThickness="3" Width="75" Height="75" Visibility="Hidden"/>
+                <Image Height="60" Width="60" Margin="5,8,0,0"></Image>
+            </Canvas>
+            <Canvas Background="Gray" Width="75" Height="75">
+                <Border BorderBrush="Blue" BorderThickness="3" Width="75" Height="75" Visibility="Hidden"/>
+                <Image Height="60" Width="60" Margin="5,8,0,0"></Image>
+            </Canvas>
+            <Canvas Background="DarkGray" Width="75" Height="75">
+                <Border BorderBrush="Blue" BorderThickness="3" Width="75" Height="75" Visibility="Hidden"/>
+                <Image Height="60" Width="60" Margin="5,8,0,0"></Image>
+            </Canvas>
+            <Canvas Background="Gray" Width="75" Height="75">
+                <Border BorderBrush="Blue" BorderThickness="3" Width="75" Height="75" Visibility="Hidden"/>
+                <Image Height="60" Width="60" Margin="5,8,0,0"></Image>
+            </Canvas>
+            <Canvas Background="DarkGray" Width="75" Height="75">
+                <Border BorderBrush="Blue" BorderThickness="3" Width="75" Height="75" Visibility="Hidden"/>
+                <Image Height="60" Width="60" Margin="5,8,0,0"></Image>
+            </Canvas>
+            <Canvas Background="Gray" Width="75" Height="75">
+                <Border BorderBrush="Blue" BorderThickness="3" Width="75" Height="75" Visibility="Hidden"/>
+                <Image Height="60" Width="60" Margin="5,8,0,0"></Image>
+            </Canvas>
+            <Canvas Background="DarkGray" Width="75" Height="75">
+                <Border BorderBrush="Blue" BorderThickness="3" Width="75" Height="75" Visibility="Hidden"/>
+                <Image Height="60" Width="60" Margin="5,8,0,0"></Image>
+            </Canvas>
+        </StackPanel>
+
+        <StackPanel Orientation="Horizontal">
+            <Canvas Background="DarkGray" Width="75" Height="75">
+                <Border BorderBrush="Blue" BorderThickness="3" Width="75" Height="75" Visibility="Hidden"/>
+                <Image Height="60" Width="60" Margin="5,8,0,0"></Image>
+            </Canvas>
+            <Canvas Background="Gray" Width="75" Height="75">
+                <Border BorderBrush="Blue" BorderThickness="3" Width="75" Height="75" Visibility="Hidden"/>
+                <Image Height="60" Width="60" Margin="5,8,0,0"></Image>
+            </Canvas>
+            <Canvas Background="DarkGray" Width="75" Height="75">
+                <Border BorderBrush="Blue" BorderThickness="3" Width="75" Height="75" Visibility="Hidden"/>
+                <Image Height="60" Width="60" Margin="5,8,0,0"></Image>
+            </Canvas>
+            <Canvas Background="Gray" Width="75" Height="75">
+                <Border BorderBrush="Blue" BorderThickness="3" Width="75" Height="75" Visibility="Hidden"/>
+                <Image Height="60" Width="60" Margin="5,8,0,0"></Image>
+            </Canvas>
+            <Canvas Background="DarkGray" Width="75" Height="75">
+                <Border BorderBrush="Blue" BorderThickness="3" Width="75" Height="75" Visibility="Hidden"/>
+                <Image Height="60" Width="60" Margin="5,8,0,0"></Image>
+            </Canvas>
+            <Canvas Background="Gray" Width="75" Height="75">
+                <Border BorderBrush="Blue" BorderThickness="3" Width="75" Height="75" Visibility="Hidden"/>
+                <Image Height="60" Width="60" Margin="5,8,0,0"></Image>
+            </Canvas>
+            <Canvas Background="DarkGray" Width="75" Height="75">
+                <Border BorderBrush="Blue" BorderThickness="3" Width="75" Height="75" Visibility="Hidden"/>
+                <Image Height="60" Width="60" Margin="5,8,0,0"></Image>
+            </Canvas>
+            <Canvas Background="Gray" Width="75" Height="75">
+                <Border BorderBrush="Blue" BorderThickness="3" Width="75" Height="75" Visibility="Hidden"/>
+                <Image Height="60" Width="60" Margin="5,8,0,0"></Image>
+            </Canvas>
+        </StackPanel>
+
+        <StackPanel Orientation="Horizontal">
+            <Canvas Background="Gray" Width="75" Height="75">
+                <Border BorderBrush="Blue" BorderThickness="3" Width="75" Height="75" Visibility="Hidden"/>
+                <Image Height="60" Width="60" Margin="5,8,0,0"></Image>
+            </Canvas>
+            <Canvas Background="DarkGray" Width="75" Height="75">
+                <Border BorderBrush="Blue" BorderThickness="3" Width="75" Height="75" Visibility="Hidden"/>
+                <Image Height="60" Width="60" Margin="5,8,0,0"></Image>
+            </Canvas>
+            <Canvas Background="Gray" Width="75" Height="75">
+                <Border BorderBrush="Blue" BorderThickness="3" Width="75" Height="75" Visibility="Hidden"/>
+                <Image Height="60" Width="60" Margin="5,8,0,0"></Image>
+            </Canvas>
+            <Canvas Background="DarkGray" Width="75" Height="75">
+                <Border BorderBrush="Blue" BorderThickness="3" Width="75" Height="75" Visibility="Hidden"/>
+                <Image Height="60" Width="60" Margin="5,8,0,0"></Image>
+            </Canvas>
+            <Canvas Background="Gray" Width="75" Height="75">
+                <Border BorderBrush="Blue" BorderThickness="3" Width="75" Height="75" Visibility="Hidden"/>
+                <Image Height="60" Width="60" Margin="5,8,0,0"></Image>
+            </Canvas>
+            <Canvas Background="DarkGray" Width="75" Height="75">
+                <Border BorderBrush="Blue" BorderThickness="3" Width="75" Height="75" Visibility="Hidden"/>
+                <Image Height="60" Width="60" Margin="5,8,0,0"></Image>
+            </Canvas>
+            <Canvas Background="Gray" Width="75" Height="75">
+                <Border BorderBrush="Blue" BorderThickness="3" Width="75" Height="75" Visibility="Hidden"/>
+                <Image Height="60" Width="60" Margin="5,8,0,0"></Image>
+            </Canvas>
+            <Canvas Background="DarkGray" Width="75" Height="75">
+                <Border BorderBrush="Blue" BorderThickness="3" Width="75" Height="75" Visibility="Hidden"/>
+                <Image Height="60" Width="60" Margin="5,8,0,0"></Image>
+            </Canvas>
+        </StackPanel>
+
+        <StackPanel Orientation="Horizontal">
+            <Canvas Background="DarkGray" Width="75" Height="75">
+                <Border BorderBrush="Blue" BorderThickness="3" Width="75" Height="75" Visibility="Hidden"/>
+                <Image Height="60" Width="60" Margin="5,8,0,0"></Image>
+            </Canvas>
+            <Canvas Background="Gray" Width="75" Height="75">
+                <Border BorderBrush="Blue" BorderThickness="3" Width="75" Height="75" Visibility="Hidden"/>
+                <Image Height="60" Width="60" Margin="5,8,0,0"></Image>
+            </Canvas>
+            <Canvas Background="DarkGray" Width="75" Height="75">
+                <Border BorderBrush="Blue" BorderThickness="3" Width="75" Height="75" Visibility="Hidden"/>
+                <Image Height="60" Width="60" Margin="5,8,0,0"></Image>
+            </Canvas>
+            <Canvas Background="Gray" Width="75" Height="75">
+                <Border BorderBrush="Blue" BorderThickness="3" Width="75" Height="75" Visibility="Hidden"/>
+                <Image Height="60" Width="60" Margin="5,8,0,0"></Image>
+            </Canvas>
+            <Canvas Background="DarkGray" Width="75" Height="75">
+                <Border BorderBrush="Blue" BorderThickness="3" Width="75" Height="75" Visibility="Hidden"/>
+                <Image Height="60" Width="60" Margin="5,8,0,0"></Image>
+            </Canvas>
+            <Canvas Background="Gray" Width="75" Height="75">
+                <Border BorderBrush="Blue" BorderThickness="3" Width="75" Height="75" Visibility="Hidden"/>
+                <Image Height="60" Width="60" Margin="5,8,0,0"></Image>
+            </Canvas>
+            <Canvas Background="DarkGray" Width="75" Height="75">
+                <Border BorderBrush="Blue" BorderThickness="3" Width="75" Height="75" Visibility="Hidden"/>
+                <Image Height="60" Width="60" Margin="5,8,0,0"></Image>
+            </Canvas>
+            <Canvas Background="Gray" Width="75" Height="75">
+                <Border BorderBrush="Blue" BorderThickness="3" Width="75" Height="75" Visibility="Hidden"/>
+                <Image Height="60" Width="60" Margin="5,8,0,0"></Image>
+            </Canvas>
+        </StackPanel>
+    </StackPanel>
+    <!--<Grid x:Name="MainGrid">
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
@@ -28,6 +309,7 @@
             <ColumnDefinition Width="*" />
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
+        --><!--row1--><!--
         <DataGridCell Grid.Row="0" Grid.Column="0" Background="Gray" Content="A8"/>
         <DataGridCell Grid.Row="0" Grid.Column="1" Background="DarkGray" Content="B8"/>
         <DataGridCell Grid.Row="0" Grid.Column="2" Background="Gray" Content="C8"/>
@@ -36,7 +318,7 @@
         <DataGridCell Grid.Row="0" Grid.Column="5" Background="DarkGray" Content="F8"/>
         <DataGridCell Grid.Row="0" Grid.Column="6" Background="Gray" Content="G8"/>
         <DataGridCell Grid.Row="0" Grid.Column="7" Background="DarkGray" Content="H8"/>
-
+        --><!--row2--><!--
         <DataGridCell Grid.Row="1" Grid.Column="0" Background="DarkGray" Content="A7"/>
         <DataGridCell Grid.Row="1" Grid.Column="1" Background="Gray" Content="B7"/>
         <DataGridCell Grid.Row="1" Grid.Column="2" Background="DarkGray" Content="C7"/>
@@ -45,7 +327,7 @@
         <DataGridCell Grid.Row="1" Grid.Column="5" Background="Gray" Content="F7"/>
         <DataGridCell Grid.Row="1" Grid.Column="6" Background="DarkGray" Content="G7"/>
         <DataGridCell Grid.Row="1" Grid.Column="7" Background="Gray" Content="H7"/>
-
+        --><!--row3--><!--
         <DataGridCell Grid.Row="2" Grid.Column="0" Background="Gray" Content="A6"/>
         <DataGridCell Grid.Row="2" Grid.Column="1" Background="DarkGray" Content="B6"/>
         <DataGridCell Grid.Row="2" Grid.Column="2" Background="Gray" Content="C6"/>
@@ -54,7 +336,7 @@
         <DataGridCell Grid.Row="2" Grid.Column="5" Background="DarkGray" Content="F6"/>
         <DataGridCell Grid.Row="2" Grid.Column="6" Background="Gray" Content="G6"/>
         <DataGridCell Grid.Row="2" Grid.Column="7" Background="DarkGray" Content="H6"/>
-
+        --><!--row4--><!--
         <DataGridCell Grid.Row="3" Grid.Column="0" Background="DarkGray" Content="A5"/>
         <DataGridCell Grid.Row="3" Grid.Column="1" Background="Gray" Content="B5"/>
         <DataGridCell Grid.Row="3" Grid.Column="2" Background="DarkGray" Content="C5"/>
@@ -63,7 +345,7 @@
         <DataGridCell Grid.Row="3" Grid.Column="5" Background="Gray" Content="F5"/>
         <DataGridCell Grid.Row="3" Grid.Column="6" Background="DarkGray" Content="G5"/>
         <DataGridCell Grid.Row="3" Grid.Column="7" Background="Gray" Content="H5"/>
-
+        --><!--row5--><!--
         <DataGridCell Grid.Row="4" Grid.Column="0" Background="Gray" Content="A4"/>
         <DataGridCell Grid.Row="4" Grid.Column="1" Background="DarkGray" Content="B4"/>
         <DataGridCell Grid.Row="4" Grid.Column="2" Background="Gray" Content="C4"/>
@@ -72,7 +354,7 @@
         <DataGridCell Grid.Row="4" Grid.Column="5" Background="DarkGray" Content="F4"/>
         <DataGridCell Grid.Row="4" Grid.Column="6" Background="Gray" Content="G4"/>
         <DataGridCell Grid.Row="4" Grid.Column="7" Background="DarkGray" Content="H4"/>
-
+        --><!--row6--><!--
         <DataGridCell Grid.Row="5" Grid.Column="0" Background="DarkGray" Content="A3"/>
         <DataGridCell Grid.Row="5" Grid.Column="1" Background="Gray" Content="B3"/>
         <DataGridCell Grid.Row="5" Grid.Column="2" Background="DarkGray" Content="C3"/>
@@ -81,7 +363,7 @@
         <DataGridCell Grid.Row="5" Grid.Column="5" Background="Gray" Content="F3"/>
         <DataGridCell Grid.Row="5" Grid.Column="6" Background="DarkGray" Content="G3"/>
         <DataGridCell Grid.Row="5" Grid.Column="7" Background="Gray" Content="H3"/>
-
+        --><!--row7--><!--
         <DataGridCell Grid.Row="6" Grid.Column="0" Background="Gray" Content="A2"/>
         <DataGridCell Grid.Row="6" Grid.Column="1" Background="DarkGray" Content="B2"/>
         <DataGridCell Grid.Row="6" Grid.Column="2" Background="Gray" Content="C2"/>
@@ -90,7 +372,7 @@
         <DataGridCell Grid.Row="6" Grid.Column="5" Background="DarkGray" Content="F2"/>
         <DataGridCell Grid.Row="6" Grid.Column="6" Background="Gray" Content="G2"/>
         <DataGridCell Grid.Row="6" Grid.Column="7" Background="DarkGray" Content="H2"/>
-
+        --><!--row8--><!--
         <DataGridCell Grid.Row="7" Grid.Column="0" Background="DarkGray" Content="A1"/>
         <DataGridCell Grid.Row="7" Grid.Column="1" Background="Gray" Content="B1"/>
         <DataGridCell Grid.Row="7" Grid.Column="2" Background="DarkGray" Content="C1"/>
@@ -101,76 +383,8 @@
         <DataGridCell Grid.Row="7" Grid.Column="7" Background="Gray" Content="H1"/>
 
 
-        <!--<Canvas Height="800" Width="800">
-            <Image x:Name="Pawn" MouseRightButtonDown="Pawn_MouseRightButtonDown"></Image>
-            <Rectangle x:Name="H7" Height="100" Width="100" Fill="DarkGray" Stroke="DarkGray" StrokeThickness="2" Canvas.Top="100" Canvas.Left="700"></Rectangle>
-            <Rectangle x:Name="B7" Height="100" Width="100" Fill="DarkGray" Stroke="DarkGray" StrokeThickness="2" Canvas.Left="100" Canvas.Top="100"></Rectangle>
-            <Rectangle x:Name="H8" Height="100" Width="100" Fill="Gray" Stroke="gray" StrokeThickness="2" Canvas.Left="700"></Rectangle>
-            <Rectangle x:Name="G8" Height="100" Width="100" Fill="DarkGray" Stroke="DarkGray" StrokeThickness="2" Canvas.Left="600"></Rectangle>
-            <Rectangle x:Name="F8" Height="100" Width="100" Fill="Gray" Stroke="gray" StrokeThickness="2" Canvas.Left="500"></Rectangle>
-            <Rectangle x:Name="E8" Height="100" Width="100" Fill="DarkGray" Stroke="DarkGray" StrokeThickness="2" Canvas.Left="400"></Rectangle>
-            <Rectangle x:Name="D8" Height="100" Width="100" Fill="Gray" Stroke="gray" StrokeThickness="2" Canvas.Left="300"></Rectangle>
-            <Rectangle x:Name="C8" Height="100" Width="100" Fill="DarkGray" Stroke="DarkGray" StrokeThickness="2" Canvas.Left="200"></Rectangle>
-            <Rectangle x:Name="B8" Height="100" Width="100" Fill="Gray" Stroke="gray" StrokeThickness="2" Canvas.Left="100"></Rectangle>
-            <Rectangle x:Name="E6" Height="100" Width="100" Fill="DarkGray" Stroke="DarkGray" StrokeThickness="2" Canvas.Left="400" Canvas.Top="200"/>
-            <Rectangle x:Name="D6" Height="100" Width="100" Fill="Gray" Stroke="gray" StrokeThickness="2" Canvas.Left="300" Canvas.Top="200"/>
-            <Rectangle x:Name="C6" Height="100" Width="100" Fill="DarkGray" Stroke="DarkGray" StrokeThickness="2" Canvas.Left="200" Canvas.Top="200"/>
-            <Rectangle x:Name="B6" Height="100" Width="100" Fill="Gray" Stroke="gray" StrokeThickness="2" Canvas.Left="100" Canvas.Top="200"/>
-            <Rectangle x:Name="A6" Height="100" Width="100" Fill="DarkGray" Stroke="DarkGray" StrokeThickness="2" Canvas.Top="200"/>
-            <Rectangle x:Name="A7" Height="100" Width="100" Fill="Gray" Stroke="gray" StrokeThickness="2" Canvas.Top="100"/>
-            <Rectangle x:Name="G7" Height="100" Width="100" Fill="Gray" Stroke="gray" StrokeThickness="2" Canvas.Left="600" Canvas.Top="100"/>
-            <Rectangle x:Name="F7" Height="100" Width="100" Fill="DarkGray" Stroke="DarkGray" StrokeThickness="2" Canvas.Left="500" Canvas.Top="100"/>
-            <Rectangle x:Name="E7" Height="100" Width="100" Fill="Gray" Stroke="gray" StrokeThickness="2" Canvas.Left="400" Canvas.Top="100"/>
-            <Rectangle x:Name="D7" Height="100" Width="100" Fill="DarkGray" Stroke="DarkGray" StrokeThickness="2" Canvas.Left="300" Canvas.Top="100"/>
-            <Rectangle x:Name="C7" Height="100" Width="100" Fill="Gray" Stroke="gray" StrokeThickness="2" Canvas.Left="200" Canvas.Top="100"/>
-            <Rectangle x:Name="A8" Height="100" Width="100" Fill="DarkGray" Stroke="DarkGray" StrokeThickness="2"/>
-            <Rectangle x:Name="G5" Height="100" Width="100" Fill="Gray" Stroke="gray" StrokeThickness="2" Canvas.Top="300" Canvas.Left="600"/>
-            <Rectangle x:Name="F5" Height="100" Width="100" Fill="DarkGray" Stroke="DarkGray" StrokeThickness="2" Canvas.Top="300" Canvas.Left="500"/>
-            <Rectangle x:Name="E5" Height="100" Width="100" Fill="Gray" Stroke="gray" StrokeThickness="2" Canvas.Top="300" Canvas.Left="400"/>
-            <Rectangle x:Name="D5" Height="100" Width="100" Fill="DarkGray" Stroke="DarkGray" StrokeThickness="2" Canvas.Top="300" Canvas.Left="300"/>
-            <Rectangle x:Name="C5" Height="100" Width="100" Fill="Gray" Stroke="gray" StrokeThickness="2" Canvas.Top="300" Canvas.Left="200"/>
-            <Rectangle x:Name="B5" Height="100" Width="100" Fill="DarkGray" Stroke="DarkGray" StrokeThickness="2" Canvas.Top="300" Canvas.Left="100"/>
-            <Rectangle x:Name="A5" Height="100" Width="100" Fill="Gray" Stroke="gray" StrokeThickness="2" Canvas.Top="300"/>
-            <Rectangle x:Name="H6" Height="100" Width="100" Fill="Gray" Stroke="gray" StrokeThickness="2" Canvas.Top="200" Canvas.Left="700"/>
-            <Rectangle x:Name="G6" Height="100" Width="100" Fill="DarkGray" Stroke="DarkGray" StrokeThickness="2" Canvas.Top="200" Canvas.Left="600"/>
-            <Rectangle x:Name="F6" Height="100" Width="100" Fill="Gray" Stroke="gray" StrokeThickness="2" Canvas.Top="200" Canvas.Left="500"/>
-            <Rectangle x:Name="H3" Height="100" Width="100" Fill="DarkGray" Stroke="DarkGray" StrokeThickness="2" Canvas.Top="500" Canvas.Left="700"/>
-            <Rectangle x:Name="G3" Height="100" Width="100" Fill="Gray" Stroke="gray" StrokeThickness="2" Canvas.Top="500" Canvas.Left="600"/>
-            <Rectangle x:Name="F3" Height="100" Width="100" Fill="DarkGray" Stroke="DarkGray" StrokeThickness="2" Canvas.Top="500" Canvas.Left="500"/>
-            <Rectangle x:Name="E3" Height="100" Width="100" Fill="Gray" Stroke="gray" StrokeThickness="2" Canvas.Top="500" Canvas.Left="400"/>
-            <Rectangle x:Name="D3" Height="100" Width="100" Fill="DarkGray" Stroke="DarkGray" StrokeThickness="2" Canvas.Top="500" Canvas.Left="300"/>
-            <Rectangle x:Name="C3" Height="100" Width="100" Fill="Gray" Stroke="gray" StrokeThickness="2" Canvas.Top="500" Canvas.Left="200"/>
-            <Rectangle x:Name="B3" Height="100" Width="100" Fill="DarkGray" Stroke="DarkGray" StrokeThickness="2" Canvas.Top="500" Canvas.Left="100"/>
-            <Rectangle x:Name="A3" Height="100" Width="100" Fill="Gray" Stroke="gray" StrokeThickness="2" Canvas.Top="500"/>
-            <Rectangle x:Name="H4" Height="100" Width="100" Fill="Gray" Stroke="gray" StrokeThickness="2" Canvas.Top="400" Canvas.Left="700"/>
-            <Rectangle x:Name="G4" Height="100" Width="100" Fill="DarkGray" Stroke="DarkGray" StrokeThickness="2" Canvas.Top="400" Canvas.Left="600"/>
-            <Rectangle x:Name="F4" Height="100" Width="100" Fill="Gray" Stroke="gray" StrokeThickness="2" Canvas.Top="400" Canvas.Left="500"/>
-            <Rectangle x:Name="E4" Height="100" Width="100" Fill="DarkGray" Stroke="DarkGray" StrokeThickness="2" Canvas.Top="400" Canvas.Left="400"/>
-            <Rectangle x:Name="D4" Height="100" Width="100" Fill="Gray" Stroke="gray" StrokeThickness="2" Canvas.Top="400" Canvas.Left="300"/>
-            <Rectangle x:Name="C4" Height="100" Width="100" Fill="DarkGray" Stroke="DarkGray" StrokeThickness="2" Canvas.Top="400" Canvas.Left="200"/>
-            <Rectangle x:Name="B4" Height="100" Width="100" Fill="Gray" Stroke="gray" StrokeThickness="2" Canvas.Top="400" Canvas.Left="100"/>
-            <Rectangle x:Name="A4" Height="100" Width="100" Fill="DarkGray" Stroke="DarkGray" StrokeThickness="2" Canvas.Top="400"/>
-            <Rectangle x:Name="H5" Height="100" Width="100" Fill="DarkGray" Stroke="DarkGray" StrokeThickness="2" Canvas.Top="300" Canvas.Left="700"/>
-            <Rectangle x:Name="H2" Height="100" Width="100" Fill="Gray" Stroke="gray" StrokeThickness="2" Canvas.Top="600" Canvas.Left="700"/>
-            <Rectangle x:Name="G2" Height="100" Width="100" Fill="DarkGray" Stroke="DarkGray" StrokeThickness="2" Canvas.Top="600" Canvas.Left="600"/>
-            <Rectangle x:Name="F2" Height="100" Width="100" Fill="Gray" Stroke="gray" StrokeThickness="2" Canvas.Top="600" Canvas.Left="500"/>
-            <Rectangle x:Name="E2" Height="100" Width="100" Fill="DarkGray" Stroke="DarkGray" StrokeThickness="2" Canvas.Top="600" Canvas.Left="400"/>
-            <Rectangle x:Name="D2" Height="100" Width="100" Fill="Gray" Stroke="gray" StrokeThickness="2" Canvas.Top="600" Canvas.Left="300"/>
-            <Rectangle x:Name="C2" Height="100" Width="100" Fill="DarkGray" Stroke="DarkGray" StrokeThickness="2" Canvas.Top="600" Canvas.Left="200"/>
-            <Rectangle x:Name="B2" Height="100" Width="100" Fill="Gray" Stroke="gray" StrokeThickness="2" Canvas.Top="600" Canvas.Left="100"/>
-            <Rectangle x:Name="A2" Height="100" Width="100" Fill="DarkGray" Stroke="DarkGray" StrokeThickness="2" Canvas.Top="600"/>
-            <Rectangle x:Name="A1" Height="100" Width="100" Fill="Gray" Stroke="gray" StrokeThickness="2" Canvas.Top="700"/>
-            <Rectangle x:Name="B1" Height="100" Width="100" Fill="DarkGray" Stroke="DarkGray" StrokeThickness="2" Canvas.Top="700" Canvas.Left="100"/>
-            <Rectangle x:Name="C1" Height="100" Width="100" Fill="Gray" Stroke="gray" StrokeThickness="2" Canvas.Top="700" Canvas.Left="200"/>
-            <Rectangle x:Name="D1" Height="100" Width="100" Fill="DarkGray" Stroke="DarkGray" StrokeThickness="2" Canvas.Top="700" Canvas.Left="300"/>
-            <Rectangle x:Name="E1" Height="100" Width="100" Fill="Gray" Stroke="gray" StrokeThickness="2" Canvas.Top="700" Canvas.Left="400"/>
-            <Rectangle x:Name="F1" Height="100" Width="100" Fill="DarkGray" Stroke="DarkGray" StrokeThickness="2" Canvas.Top="700" Canvas.Left="500"/>
-            <Rectangle x:Name="G1" Height="100" Width="100" Fill="Gray" Stroke="gray" StrokeThickness="2" Canvas.Top="700" Canvas.Left="600"/>
-            <Rectangle x:Name="H1" Height="100" Width="100" Fill="DarkGray" Stroke="DarkGray" StrokeThickness="2" Canvas.Top="700" Canvas.Left="700"/>
-            <Grid Height="790" Width="790"/>
-
-        </Canvas>-->
-
-
-    </Grid>
+        <StackPanel Grid.Row="0" Grid.Column="0">
+            <Image x:Name="A8Image"></Image>
+        </StackPanel>
+    </Grid>-->
 </Window>

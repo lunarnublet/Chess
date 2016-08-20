@@ -11,25 +11,52 @@ namespace ChessController
     {
         Board board;
         PieceController pieceController;
-        List<string> moves;
+        public bool whitesTurn = false;
 
         public List<string> OnCheckMoves(ref Piece piece)
         {
-            moves = pieceController.PieceMovementOptions(ref piece, board.boardPieces);
-            return moves;
+            if (piece.isWhite == whitesTurn)
+            {
+                foreach (Piece item in pieceController.availableToMove)
+                {
+                    if (piece == item)
+                    {
+                        return piece.possibleMoves;
+                    }
+                }
+            }
+            return null;
         }
 
         public bool OnMove(ref Piece piece, int row, int col)
         {
-            for (int i = 0; i < moves.Count; ++i)
+
+            if (piece.isWhite == whitesTurn)
             {
-                if (moves[i].Equals(row + "" + col))
+                for (int i = 0; i < piece.possibleMoves.Count; ++i)
                 {
-                    piece.hasMoved = true;
-                    return board.MovePiece(ref piece, row, col);
+                    if (piece.possibleMoves[i].Equals(row + "" + col))
+                    {
+                        if (board.BoardPieces[row, col] != null)
+                        {
+                            pieceController.killPiece(ref board.BoardPieces[row, col]);
+                        }
+                        board.MovePiece(ref piece, row, col);
+                        board.BoardPieces[row, col].hasMoved = true;
+                        return true;
+                    }
                 }
             }
             return false;
+        }
+
+        public List<Piece> OnNewTurn()
+        {
+            whitesTurn = !whitesTurn;
+            pieceController.GetPiecesThatCanMove(board.BoardPieces, !whitesTurn);
+            pieceController.Check(board.BoardPieces, whitesTurn, false);
+            pieceController.availableToMove = pieceController.GetPiecesThatCanMove(board.BoardPieces, whitesTurn);
+            return pieceController.availableToMove;
         }
 
         public void Run()
@@ -38,32 +65,6 @@ namespace ChessController
             pieceController = new PieceController();
             pieceController.initializeNew();
             SetUpBoard();
-            Console.WriteLine(board.ToString());
-
-            OnCheckMoves(ref board.boardPieces[1, 0]);
-            OnMove(ref board.boardPieces[1, 0], 3, 0);
-            Console.WriteLine(board.ToString());
-
-            OnCheckMoves(ref board.boardPieces[3, 0]);
-            OnMove(ref board.boardPieces[3, 0], 4, 0);
-            Console.WriteLine(board.ToString());
-
-            OnCheckMoves(ref board.boardPieces[6, 2]);
-            OnMove(ref board.boardPieces[6, 2], 4, 2);
-            Console.WriteLine(board.ToString());
-
-            OnCheckMoves(ref board.boardPieces[1, 1]);
-            OnMove(ref board.boardPieces[1, 1], 2, 1);
-            Console.WriteLine(board.ToString());
-
-            OnCheckMoves(ref board.boardPieces[0, 2]);
-            OnMove(ref board.boardPieces[0, 2], 2, 0);
-            Console.WriteLine(board.ToString());
-
-            OnCheckMoves(ref board.boardPieces[2, 0]);
-            OnMove(ref board.boardPieces[2, 0], 4, 2);
-            Console.WriteLine(board.ToString());
-
         }
 
         public void SetUpBoard()
@@ -76,6 +77,11 @@ namespace ChessController
                 board.PlacePiece(6, i, ref pieceController.aliveWhitePieces[i + 8]);
                 board.PlacePiece(1, i, ref pieceController.aliveBlackPieces[i + 8]);
             }
+        }
+
+        public Board getBoard()
+        {
+            return board;
         }
     }
 }

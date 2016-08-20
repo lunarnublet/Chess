@@ -11,5 +11,6 @@ namespace ChessController
     {
         List<string> OnCheckMoves(ref Piece piece);
         bool OnMove(ref Piece piece, int newRow, int newCol);
+        Board getBoard();
     }
 }

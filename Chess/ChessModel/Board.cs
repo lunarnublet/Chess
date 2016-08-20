@@ -4,13 +4,24 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.IO;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
 
 namespace ChessModel
 {
     public class Board
     {
-        const int boardSize = 8;
-        public Piece[,] boardPieces = new Piece[boardSize, boardSize];
+        public const int boardSize = 8;
+        private Piece[,] boardPieces = new Piece[boardSize,boardSize];
+
+        public Piece[,] BoardPieces
+        {
+            get { return boardPieces; }
+            set { boardPieces = value; OnBoardPiecesChanged(); }
+        }
+
+        public delegate void BoardChanged(Piece[,] boardPieces);
+        public event BoardChanged BoardPiecesChanged;
 
         public Board()
         {
@@ -19,9 +30,11 @@ namespace ChessModel
 
         public bool PlacePiece(int row, int col, ref Piece piece)
         {
-            if (boardPieces[row, col] == null)
+            Piece[,] temp = BoardPieces;
+            if (temp[row, col] == null)
             {
-                boardPieces[row, col] = piece;
+                temp[row, col] = piece;
+                BoardPieces = temp;
                 return true;
             }
             return false;
@@ -54,7 +67,9 @@ namespace ChessModel
         {
             try
             {
-                boardPieces[row, col] = null;
+                Piece[,] temp = BoardPieces;
+                temp[row, col] = null;
+                BoardPieces = temp;
                 return true;
             }
             catch (IndexOutOfRangeException)
@@ -65,16 +80,18 @@ namespace ChessModel
 
         public bool MovePiece(ref Piece piece, int newRow, int newCol)
         {
+            Piece[,] temp = BoardPieces;
             for (int i = 0; i < boardSize; ++i)
             {
                 for (int v = 0; v < boardSize; ++v)
                 {
-                    if (boardPieces[i, v] == piece)
+                    if (temp[i,v] == piece)
                     { 
                         try
                         {
-                            boardPieces[newRow, newCol] = piece;
-                            boardPieces[i, v] = null;
+                            temp[newRow, newCol] = piece;
+                            temp[i, v] = null;
+                            BoardPieces = temp;
                             return true;
                         }
                         catch (IndexOutOfRangeException)
@@ -85,6 +102,14 @@ namespace ChessModel
                 }
             }
             return false;
+        }
+
+        private void OnBoardPiecesChanged()
+        {
+            if (BoardPiecesChanged != null)
+            {
+                BoardPiecesChanged(BoardPieces);
+            }
         }
     }
 }

@@ -11,7 +11,16 @@ namespace ChessModel
         public Pawn(bool isWhite):base(isWhite)
         {
             pieceType = PieceName.PAWN;
+            if (isWhite)
+            {
+                image = new System.Windows.Media.Imaging.BitmapImage(new Uri("C:\\Chess\\Chess\\Chess\\PiecePNGs\\White Pawn.png")); 
+            }
+            else
+            {
+                image = new System.Windows.Media.Imaging.BitmapImage(new Uri("C:\\Chess\\Chess\\Chess\\PiecePNGs\\Black Pawn.png"));
+            }
         }
+    
 
         public override string ToString()
         {

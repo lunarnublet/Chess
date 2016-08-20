@@ -19,15 +19,8 @@ namespace ConsolChess
             game.Run();
 
 
+
             Console.WriteLine("Program ending...");
         }
-
-        //static void referenceTest( Piece[] pieces)
-        //{
-        //    Console.WriteLine(pieces[0].ToString() + ", " + pieces[1].ToString());
-        //    pieces[0] = new Rook(false);
-        //    pieces[1] = new Pawn(false);
-        //    Console.WriteLine(pieces[0].ToString() + ", " + pieces[1].ToString());
-        //}
     }
 }
