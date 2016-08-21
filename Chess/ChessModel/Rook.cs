@@ -15,11 +15,11 @@ namespace ChessModel
             //else { imageURI = "C:\\Chess\\Chess\\Chess\\PiecePNGs\\Black Rook.png"; }
             if (isWhite)
             {
-                image = new System.Windows.Media.Imaging.BitmapImage(new Uri("C:\\Chess\\Chess\\Chess\\PiecePNGs\\White Rook.png"));
+                image = new System.Windows.Media.Imaging.BitmapImage(new Uri("D:\\cSharp\\Chess\\Chess\\Chess\\PiecePNGs\\White Rook.png"));
             }
             else
             {
-                image = new System.Windows.Media.Imaging.BitmapImage(new Uri("C:\\Chess\\Chess\\Chess\\PiecePNGs\\Black Rook.png"));
+                image = new System.Windows.Media.Imaging.BitmapImage(new Uri("D:\\cSharp\\Chess\\Chess\\Chess\\PiecePNGs\\Black Rook.png"));
             }
         }
 

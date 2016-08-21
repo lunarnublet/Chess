@@ -13,6 +13,17 @@ namespace ChessController
         PieceController pieceController;
         public bool whitesTurn = false;
 
+        public bool GetIfWhiteKingInCheck()
+        {
+            return pieceController.whiteKingInCheck;
+        }
+
+        public bool GetIfBlackKingInCheck()
+        {
+            return pieceController.blackKingInCheck;
+        }
+
+
         public List<string> OnCheckMoves(ref Piece piece)
         {
             if (piece.isWhite == whitesTurn)
@@ -30,16 +41,40 @@ namespace ChessController
 
         public bool OnMove(ref Piece piece, int row, int col)
         {
-
             if (piece.isWhite == whitesTurn)
             {
                 for (int i = 0; i < piece.possibleMoves.Count; ++i)
                 {
                     if (piece.possibleMoves[i].Equals(row + "" + col))
                     {
+                        if (piece is Pawn)
+                        {
+                            if (row == 0 || row == 7)
+                            {
+                                Queen queen = new Queen(piece.isWhite);
+                                pieceController.ChangePiece(ref piece, queen);
+                                piece = queen;
+                            }
+                        }
                         if (board.BoardPieces[row, col] != null)
                         {
                             pieceController.killPiece(ref board.BoardPieces[row, col]);
+                        }
+                        if (piece is King)
+                        {
+                            int kingCol = -1;
+                            int kingRow = -1;
+                            pieceController.GetPiecePosition(ref piece, board.BoardPieces, out kingRow, out kingCol);
+                            if (col == kingCol + 2)
+                            {
+                                board.MovePiece(ref board.BoardPieces[row, kingCol + 4], row, col -1);
+                                board.BoardPieces[row, col - 1].hasMoved = true;
+                            }
+                            if (col == kingCol - 2)
+                            {
+                                board.MovePiece(ref board.BoardPieces[row, kingCol - 3], row, col + 1);
+                                board.BoardPieces[row, col + 1].hasMoved = true;
+                            }
                         }
                         board.MovePiece(ref piece, row, col);
                         board.BoardPieces[row, col].hasMoved = true;
@@ -53,8 +88,9 @@ namespace ChessController
         public List<Piece> OnNewTurn()
         {
             whitesTurn = !whitesTurn;
-            pieceController.GetPiecesThatCanMove(board.BoardPieces, !whitesTurn);
+            pieceController.UpdateMoveOptions(board.BoardPieces);
             pieceController.Check(board.BoardPieces, whitesTurn, false);
+            pieceController.Check(board.BoardPieces, !whitesTurn, false);
             pieceController.availableToMove = pieceController.GetPiecesThatCanMove(board.BoardPieces, whitesTurn);
             return pieceController.availableToMove;
         }

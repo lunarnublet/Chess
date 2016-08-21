@@ -13,11 +13,11 @@ namespace ChessModel
             pieceType = PieceName.PAWN;
             if (isWhite)
             {
-                image = new System.Windows.Media.Imaging.BitmapImage(new Uri("C:\\Chess\\Chess\\Chess\\PiecePNGs\\White Pawn.png")); 
+                image = new System.Windows.Media.Imaging.BitmapImage(new Uri("D:\\cSharp\\Chess\\Chess\\Chess\\PiecePNGs\\White Pawn.png")); 
             }
             else
             {
-                image = new System.Windows.Media.Imaging.BitmapImage(new Uri("C:\\Chess\\Chess\\Chess\\PiecePNGs\\Black Pawn.png"));
+                image = new System.Windows.Media.Imaging.BitmapImage(new Uri("D:\\cSharp\\Chess\\Chess\\Chess\\PiecePNGs\\Black Pawn.png"));
             }
         }
     

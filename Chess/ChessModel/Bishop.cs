@@ -15,13 +15,13 @@ namespace ChessModel
             //else { imageURI = "C:\\Chess\\Chess\\Chess\\PiecePNGs\\Black Bishop.png"; }
             if (isWhite)
             {
-                image = new System.Windows.Media.Imaging.BitmapImage(new Uri("C:\\Chess\\Chess\\Chess\\PiecePNGs\\White Bishop.png"));
+                image = new System.Windows.Media.Imaging.BitmapImage(new Uri("D:\\cSharp\\Chess\\Chess\\Chess\\PiecePNGs\\White Bishop.png"));
             }
             else
             {
-                image = new System.Windows.Media.Imaging.BitmapImage(new Uri("C:\\Chess\\Chess\\Chess\\PiecePNGs\\Black Bishop.png"));
+                image = new System.Windows.Media.Imaging.BitmapImage(new Uri("D:\\cSharp\\Chess\\Chess\\Chess\\PiecePNGs\\Black Bishop.png"));
+                Console.WriteLine();
             }
-
         }
 
         public override string ToString()

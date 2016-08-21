@@ -15,10 +15,8 @@ namespace ConsolChess
         {
             Console.WriteLine("Program starting...");
 
-            Game game = new Game();
-            game.Run();
-
-
+            //Game game = new Game();
+            //game.Run();
 
             Console.WriteLine("Program ending...");
         }

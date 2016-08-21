@@ -163,7 +163,7 @@ namespace ChessController
                 tempBoard = GetCopyOfBoard(boardPieces);
                 if (i != -1)
                 {
-                    List<string> tempMoves = PieceMovementOptions(ref tempBoard[i, v], tempBoard);
+                    List<string> tempMoves = tempBoard[i,v].possibleMoves;
                     if (tempMoves.Count > 0)
                     {
                         if (checker != null)
@@ -182,19 +182,40 @@ namespace ChessController
                                 }
                                 foreach (string item2 in checker.possibleMoves)
                                 {
-                                    if (item == item2)
+                                    if (piece is King)
                                     {
-                                        bool exists = false;
-                                        foreach (string item3 in tempMoves2)
+                                        if (item != item2)
                                         {
-                                            if (item == item3)
+                                            bool exists = false;
+                                            foreach (string item3 in tempMoves2)
                                             {
-                                                exists = true;
+                                                if (item == item3)
+                                                {
+                                                    exists = true;
+                                                }
+                                            }
+                                            if (!exists)
+                                            {
+                                                tempMoves2.Add(item);
                                             }
                                         }
-                                        if (!exists)
+                                    }
+                                    else
+                                    {
+                                        if (item == item2)
                                         {
-                                            tempMoves2.Add(item);
+                                            bool exists = false;
+                                            foreach (string item3 in tempMoves2)
+                                            {
+                                                if (item == item3)
+                                                {
+                                                    exists = true;
+                                                }
+                                            }
+                                            if (!exists)
+                                            {
+                                                tempMoves2.Add(item);
+                                            }
                                         }
                                     }
                                 }
@@ -205,12 +226,11 @@ namespace ChessController
                                 int col = int.Parse(item.Substring(1, 1));
                                 tempBoard[row, col] = tempBoard[i, v];
                                 tempBoard[i, v] = null;
-                                checker.possibleMoves = PieceMovementOptions(ref checker, tempBoard);
+                                UpdateMoveOptions(tempBoard, !whitesTurn);
                                 if (Check(tempBoard, whitesTurn, true))
                                 {
                                     tempRemove.Add(item);
                                 }
-                                checker.possibleMoves = oldCheckerMoves;
                                 tempBoard = GetCopyOfBoard(boardPieces);
                             }
                             foreach (var item in tempRemove)
@@ -219,16 +239,34 @@ namespace ChessController
                             }
                             if (tempMoves2.Count == 0)
                             {
-                                boardPieces[i, v].possibleMoves = tempMoves2;
                                 possibleRemoval.Add(piece);
                             }
-                            else
-                            {
-                                boardPieces[i, v].possibleMoves = tempMoves2;
-                            }
+                            boardPieces[i, v].possibleMoves = tempMoves2;
                         }
                         else
                         {
+                            List<string> tempRemove = new List<string>();
+                            foreach (string move in tempMoves)
+                            {
+                                int row = int.Parse(move.Substring(0, 1));
+                                int col = int.Parse(move.Substring(1, 1));
+                                tempBoard[row, col] = tempBoard[i, v];
+                                tempBoard[i, v] = null;
+                                UpdateMoveOptions(tempBoard, !whitesTurn);
+                                if (Check(tempBoard, whitesTurn, true))
+                                {
+                                    tempRemove.Add(move);
+                                }
+                                tempBoard = GetCopyOfBoard(boardPieces);
+                            }
+                            foreach (string move in tempRemove)
+                            {
+                                tempMoves.Remove(move);
+                            }
+                            if (tempMoves.Count == 0)
+                            {
+                                possibleRemoval.Add(piece);
+                            }
                             boardPieces[i, v].possibleMoves = tempMoves;
                         }
                     }
@@ -245,7 +283,46 @@ namespace ChessController
             return temp;
         }
 
-        public bool changePiece(ref Piece oldPiece, Piece newPiece)
+        public void UpdateMoveOptions( Piece[,] boardPieces)
+        {
+            for (int i = 0; i < aliveWhitePieces.Length; ++i)
+            {
+                if (aliveWhitePieces[i] != null)
+                {
+                    aliveWhitePieces[i].possibleMoves = PieceMovementOptions(ref aliveWhitePieces[i], boardPieces);
+                }
+                if (aliveBlackPieces[i] != null)
+                {
+                    aliveBlackPieces[i].possibleMoves = PieceMovementOptions(ref aliveBlackPieces[i], boardPieces);
+                }
+            }
+        }
+
+        public void UpdateMoveOptions(Piece[,] boardPieces, bool whiteMoves)
+        {
+            if (whiteMoves)
+            {
+                for (int i = 0; i < aliveWhitePieces.Length; ++i)
+                {
+                    if (aliveWhitePieces[i] != null)
+                    {
+                        aliveWhitePieces[i].possibleMoves = PieceMovementOptions(ref aliveWhitePieces[i], boardPieces);
+                    }
+                }
+            }
+            else
+            {
+                for (int i = 0; i < aliveBlackPieces.Length; ++i)
+                {
+                    if (aliveBlackPieces[i] != null)
+                    {
+                        aliveBlackPieces[i].possibleMoves = PieceMovementOptions(ref aliveBlackPieces[i], boardPieces);
+                    }
+                }
+            }
+        }
+
+        public bool ChangePiece(ref Piece oldPiece, Piece newPiece)
         {
             for (int i = 0; i < aliveWhitePieces.Length; ++i)
             {
@@ -378,30 +455,23 @@ namespace ChessController
         {
             List<string> moveOptions = new List<string>();
             if (piece == null) { return moveOptions; }
-            int pieceRow = 0;
-            int pieceCol = 0;
-            for (int i = 0; i < Board.boardSize; ++i)
+            int pieceRow = -1;
+            int pieceCol = -1;
+            GetPiecePosition(ref piece, boardPieces, out pieceRow, out pieceCol);
+            if (pieceRow == -1)
             {
-                for (int v = 0; v < Board.boardSize; ++v)
-                {
-                    if (boardPieces[i, v] == piece)
-                    {
-                        pieceRow = i;
-                        pieceCol = v;
-                        break;
-                    }
-                }
+                return moveOptions;
             }
             switch (piece.pieceType)
             {
                 case PieceName.PAWN:
                     {
-                        moveOptions.AddRange(CheckPawnMoves(pieceRow, pieceCol, boardPieces, (Pawn)piece));
+                        moveOptions.AddRange(CheckPawnMoves(pieceRow, pieceCol, boardPieces, piece));
                         break;
                     }
                 case PieceName.KING:
                     {
-                        moveOptions.AddRange(CheckKingMoves(pieceRow, pieceCol, boardPieces, (King)piece));
+                        moveOptions.AddRange(CheckKingMoves(pieceRow, pieceCol, boardPieces, piece));
                         break;
                     }
                 case PieceName.BISHOP:
@@ -469,11 +539,30 @@ namespace ChessController
             return moves;
         }
 
-        private List<string> CheckKingMoves(int pieceRow, int pieceCol, Piece[,] boardPieces, King piece)
+        private List<string> CheckKingMoves(int pieceRow, int pieceCol, Piece[,] boardPieces, Piece piece)
         {
             List<string> moves = CheckStraightMoves(pieceRow, pieceCol, boardPieces, piece, false);
             moves.AddRange(CheckDiagnalMoves(pieceRow, pieceCol, boardPieces, piece, false));
-
+            if (piece.hasMoved == false)
+            {
+                int row = -1;
+                int col = -1;
+                GetPiecePosition(ref piece, boardPieces, out row, out col);
+                if (boardPieces[row, col - 3].hasMoved == false)
+                {
+                    if (boardPieces[row, col - 2] == null && boardPieces[row, col - 1] == null)
+                    {
+                        moves.Add(row + "" + (col - 2));
+                    }
+                }
+                if (boardPieces[row, col + 4].hasMoved == false)
+                {
+                    if (boardPieces[row, col + 3] == null && boardPieces[row, col + 2] == null && boardPieces[row, col + 1] == null)
+                    {
+                        moves.Add(row + "" + (col + 2));
+                    }
+                }
+            }
             return moves;
         }
 

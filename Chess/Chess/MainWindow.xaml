@@ -5,8 +5,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Chess"
         mc:Ignorable="d"
-        Title="Chess" Height="637" Width="610" ResizeMode="CanMinimize">
+        Title="Chess" Height="697" Width="610" ResizeMode="CanMinimize">
     <StackPanel x:Name="MainPanel" Orientation="Vertical" MouseLeftButtonDown="MainPanel_MouseLeftButtonDown" MouseRightButtonDown="MainPanel_MouseRightButtonDown">
+        <StackPanel x:Name="InfoPanel" Height="60" Width="600">
+            <Label x:Name="WhiteKingStatusLabel" FontSize="15">White King: Good</Label>
+            <Label x:Name="BlackKingStatusLabel" FontSize="15">Black King: Good</Label>
+        </StackPanel>
         <StackPanel Orientation="Horizontal">
             <Canvas Background="Gray" Width="75" Height="75">
                 <Border BorderBrush="Blue" BorderThickness="3" Width="75" Height="75" Visibility="Hidden"/>

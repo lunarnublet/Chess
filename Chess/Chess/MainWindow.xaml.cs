@@ -105,6 +105,39 @@ namespace Chess
         {
             availablePieces = game.OnNewTurn();
             DisplayAvailablePieceBorders();
+            SetLabels();
+        }
+
+        private void SetLabels()
+        {
+            string whiteCheckStatus = "";
+            string blackCheckStatus = "";
+            if (game.GetIfWhiteKingInCheck())
+            {
+                whiteCheckStatus = "In Check";
+                if (game.whitesTurn && availablePieces.Count == 0)
+                {
+                    whiteCheckStatus = "In Check Mate";
+                }
+            }
+            else
+            {
+                whiteCheckStatus = "Good";
+            }
+            if (game.GetIfBlackKingInCheck())
+            {
+                blackCheckStatus = "In Check";
+                if (!game.whitesTurn && availablePieces.Count == 0)
+                {
+                    blackCheckStatus = "In Check Mate";
+                }
+            }
+            else
+            {
+                blackCheckStatus = "Good";
+            }
+            WhiteKingStatusLabel.Content = "White King: " + whiteCheckStatus;
+            BlackKingStatusLabel.Content = "Black King: " + blackCheckStatus;
         }
 
         private void DisplayAvailablePieceBorders()
@@ -140,7 +173,7 @@ namespace Chess
                 {
                     int row = 0;
                     int col = 0;
-                    row = (int)(point.Y / 75);
+                    row = (int)((point.Y - InfoPanel.Height) / 75);
                     col = (int)(point.X / 75);
 
                     if (game.OnMove(ref board.BoardPieces[rowSelected, colSelected], row, col))
@@ -155,7 +188,7 @@ namespace Chess
             {
                 if (e.ClickCount == 1)
                 {
-                    rowSelected = (int)(point.Y / 75);
+                    rowSelected = (int)((point.Y - InfoPanel.Height) / 75);
                     colSelected = (int)(point.X / 75);
                     if (ShowPossibleMoveBorders(game.OnCheckMoves(ref board.BoardPieces[rowSelected, colSelected])))
                     {
